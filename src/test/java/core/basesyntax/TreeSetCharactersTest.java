@@ -3,13 +3,15 @@ package core.basesyntax;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class TreeSetCharactersTest {
     private static final String FIVE_CHARACTERS = "abdhi";
     private static final String FOUR_CHARACTERS = "ejlo";
     private static final String WITHOUT_CHARACTERS = "";
 
     @Test
-    public void getFiveUniqueCharacters() {
+    public void getFiveUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file1.txt");
         Assert.assertEquals("Test faild with result: " + actualResult,
@@ -17,7 +19,7 @@ public class TreeSetCharactersTest {
     }
 
     @Test
-    public void getLessThenFiveUniqueCharacters() {
+    public void getLessThenFiveUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file2.txt");
         Assert.assertEquals("Test faild with result: " + actualResult,
@@ -25,7 +27,7 @@ public class TreeSetCharactersTest {
     }
 
     @Test
-    public void getEmptyUniqueCharacters() {
+    public void getEmptyUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file3.txt");
         Assert.assertEquals("Test faild with result: " + actualResult,
@@ -33,10 +35,20 @@ public class TreeSetCharactersTest {
     }
 
     @Test
-    public void getEmptyUniqueCharactersFromNumbers() {
+    public void getEmptyUniqueCharactersFromNumbers() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file4.txt");
         Assert.assertEquals("Test faild with result: " + actualResult,
                 WITHOUT_CHARACTERS, actualResult);
+    }
+
+    @Test
+    public void getExceptionWhenFileNotExist() {
+        TreeSetCharacters characters = new TreeSetCharacters();
+        try {
+            characters.getUniqueCharacters("file");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
