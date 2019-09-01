@@ -31,4 +31,12 @@ public class TreeSetCharactersTest {
         Assert.assertEquals("Test faild with result: " + actualResult,
                 WITHOUT_CHARACTERS, actualResult);
     }
+
+    @Test
+    public void getEmptyUniqueCharactersFromNumbers() {
+        TreeSetCharacters characters = new TreeSetCharacters();
+        String actualResult = characters.getUniqueCharacters("file4.txt");
+        Assert.assertEquals("Test faild with result: " + actualResult,
+                WITHOUT_CHARACTERS, actualResult);
+    }
 }
