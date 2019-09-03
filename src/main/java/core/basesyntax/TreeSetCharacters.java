@@ -24,7 +24,7 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
 
-    private final static int MAX_SIZE = 5;
+    private final int MAX_SIZE = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
