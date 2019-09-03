@@ -27,22 +27,30 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        InputStream inputStream = Files.newInputStream(Paths.get(fileName));
-        int bytesOfFile;
-        StringBuilder onlyLetters = new StringBuilder();
-        do {
-            bytesOfFile = inputStream.read();
-            if ((bytesOfFile > 64 && bytesOfFile < 91) || (bytesOfFile > 96 && bytesOfFile < 123)) {
-                onlyLetters = onlyLetters.append((char)bytesOfFile);
+        final int numberLetters = 5;
+        final int letter_A = 65;
+        final int Letter_Z = 90;
+        final int letter_a = 97;
+        final int letter_z = 122;
+
+        try (InputStream inputStream = Files.newInputStream(Paths.get(fileName))) {
+            int bytesOfFile;
+            StringBuilder onlyLetters = new StringBuilder();
+            do {
+                bytesOfFile = inputStream.read();
+                if ((bytesOfFile >= letter_A && bytesOfFile <= Letter_Z)
+                        || (bytesOfFile >= letter_a && bytesOfFile <= letter_z)) {
+                    onlyLetters = onlyLetters.append((char) bytesOfFile);
+                }
+            } while (bytesOfFile != -1);
+            String lowerCase = new String(onlyLetters).toLowerCase();
+            Set<String> letters = new TreeSet<String>(Arrays.asList(lowerCase.split("")));
+            Iterator alphabet = letters.iterator();
+            String result = "";
+            for (int i = 0; i < numberLetters && alphabet.hasNext(); i++) {
+                result += alphabet.next();
             }
-        } while (bytesOfFile != -1);
-        String lowerCase = new String(onlyLetters).toLowerCase();
-        Set<String> letters = new TreeSet<String>(Arrays.asList(lowerCase.split("")));
-        Iterator alphabet = letters.iterator();
-        String result = "";
-        for (int i = 0; i < 5 && alphabet.hasNext(); i++) {
-            result += alphabet.next();
+            return result;
         }
-        return result;
     }
 }
