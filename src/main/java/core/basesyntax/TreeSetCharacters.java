@@ -28,17 +28,17 @@ public class TreeSetCharacters {
         Set<Character> set = new TreeSet<>();
         for (String line : Files.readAllLines(Paths.get(fileName))) {
             for (Character character : line.toLowerCase().toCharArray()) {
-                set.add(character);
+                if (Character.isLetter(character)) {
+                    set.add(character);
+                }
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
         int i = 0;
         for (Character character : set) {
-            if (character >= 'a' && character <= 'z') {
-                stringBuilder.append(character);
-                if (++i == 5) {
-                    break;
-                }
+            stringBuilder.append(character);
+            if (++i == 5) {
+                break;
             }
         }
         return stringBuilder.toString();
