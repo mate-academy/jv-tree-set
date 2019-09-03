@@ -22,6 +22,8 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int ELEMENTS_NUMBER = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder returnData = new StringBuilder();
         TreeSet<Character> treeSet = new TreeSet<Character>();
@@ -39,7 +41,7 @@ public class TreeSetCharacters {
         int i = 0;
         for (Character item : treeSet) {
             returnData.append(item);
-            if (++i == 5) {
+            if (++i == ELEMENTS_NUMBER) {
                 break;
             }
         }
