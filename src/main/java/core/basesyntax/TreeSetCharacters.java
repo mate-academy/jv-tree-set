@@ -23,9 +23,12 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws IOException {
 
+    private final static int maxSise = 5;
+
+    public String getUniqueCharacters(String fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
             Set<Character> set = new TreeSet<>();
             int c = br.read();
             while (c != -1) {
@@ -34,9 +37,9 @@ public class TreeSetCharacters {
                 }
                 c = br.read();
             }
-            if (set.size() > 5) {
+            if (set.size() > maxSise) {
                 return set.toString().replaceAll("[^a-zA-Z]", "")
-                        .substring(0, 5);
+                        .substring(0, maxSise);
             }
             return set.toString().replaceAll("[^a-zA-Z]", "");
         }
