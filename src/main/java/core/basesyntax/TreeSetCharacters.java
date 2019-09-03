@@ -24,10 +24,11 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder returnData = new StringBuilder();
-        BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
         TreeSet<Character> treeSet = new TreeSet<Character>();
-        while (fileReader.ready()) {
-            returnData.append(fileReader.readLine());
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
+            while (fileReader.ready()) {
+                returnData.append(fileReader.readLine());
+            }
         }
         char[] charSequence = returnData.toString().replaceAll("[^a-zA-Z]", "")
                 .toLowerCase().toCharArray();
