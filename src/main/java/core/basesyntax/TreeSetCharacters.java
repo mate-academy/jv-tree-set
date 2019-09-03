@@ -22,11 +22,12 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int ITEM_TO_RETURN = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         String result = "";
-        try {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName));) {
             TreeSet<Character> stringTreeSet = new TreeSet<>();
-            BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
             while (fileReader.ready()) {
                 String string = fileReader.readLine().toLowerCase().replaceAll("[^a-zA-Z]", "");
                 for (int i = 0; i < string.length(); i++) {
@@ -37,7 +38,7 @@ public class TreeSetCharacters {
             }
             int setSize = stringTreeSet.size();
             for (int i = 0; i < setSize; i++) {
-                if (i < 5) {
+                if (i < ITEM_TO_RETURN) {
                     result += stringTreeSet.first();
                     stringTreeSet.remove(stringTreeSet.first());
                 }
