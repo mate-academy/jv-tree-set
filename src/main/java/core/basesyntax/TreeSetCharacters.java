@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -27,30 +26,30 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     static final int NUMBER_LETTERS = 5;
-    static final int LETTER_A = 65;
-    static final int LETTER_Z = 90;
-    static final int LETTER_a = 97;
-    static final int LETTER_z = 122;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         try (InputStream inputStream = Files.newInputStream(Paths.get(fileName))) {
             int bytesOfFile;
-            StringBuilder onlyLetters = new StringBuilder();
+            Set<Character> chars = new TreeSet<>();
+
             do {
                 bytesOfFile = inputStream.read();
-                if ((bytesOfFile >= LETTER_A && bytesOfFile <= LETTER_Z)
-                        || (bytesOfFile >= LETTER_a && bytesOfFile <= LETTER_z)) {
-                    onlyLetters = onlyLetters.append((char) bytesOfFile);
+                Character character = Character.toLowerCase((char)bytesOfFile);
+                if (isLatChar(character)) {
+                    chars.add(character);
                 }
             } while (bytesOfFile != -1);
-            String lowerCase = new String(onlyLetters).toLowerCase();
-            Set<String> letters = new TreeSet<String>(Arrays.asList(lowerCase.split("")));
-            Iterator alphabet = letters.iterator();
-            String result = "";
+
+            Iterator alphabet = chars.iterator();
+            StringBuilder result = new StringBuilder("");
             for (int i = 0; i < NUMBER_LETTERS && alphabet.hasNext(); i++) {
-                result += alphabet.next();
+                result.append(alphabet.next());
             }
-            return result;
+            return result.toString();
         }
+    }
+
+    private boolean isLatChar(char character) {
+        return (character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z');
     }
 }
