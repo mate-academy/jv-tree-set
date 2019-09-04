@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -25,27 +26,23 @@ public class TreeSetCharacters {
     private static final int LETTERS_AMOUNT = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        TreeSet<Character> lettersFromFile = new TreeSet<>();
+        Set<Character> lettersFromFile = new TreeSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            int input = reader.read();
-            while (input != -1) {
+            int input;
+            while ((input = reader.read()) != -1) {
                 if (input >= 'A' && input <= 'Z') {
-                    input += 32;
-                }
-                if (input >= 'a' && input <= 'z') {
+                    lettersFromFile.add(Character.toLowerCase((char) input));
+                } else if (input >= 'a' && input <= 'z') {
                     lettersFromFile.add((char) input);
                 }
-                input = reader.read();
             }
         }
         StringBuilder result = new StringBuilder();
-        int border = LETTERS_AMOUNT;
         for (char letter : lettersFromFile) {
             result.append(letter);
-            if (border == 1) {
+            if (result.length() == LETTERS_AMOUNT) {
                 break;
             }
-            border--;
         }
         return new String(result);
     }
