@@ -23,7 +23,7 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public static String getUniqueCharacters(String fileName) {
+    public static String getUniqueCharacters(String fileName)throws IOException {
         int outputLength = 5;
         String line;
         String[] parsed;
@@ -47,9 +47,6 @@ public class TreeSetCharacters {
                 return treeSet.toString().replaceAll("[^A-Za-z]", "").substring(0, outputLength);
             }
             return treeSet.toString().replaceAll("[^A-Za-z]", "");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return treeSet.toString();
     }
 }
