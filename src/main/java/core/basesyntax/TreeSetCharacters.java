@@ -35,7 +35,7 @@ public class TreeSetCharacters {
             do {
                 bytesOfFile = inputStream.read();
                 Character character = Character.toLowerCase((char)bytesOfFile);
-                if (isLatChar(character)) {
+                if (isLatterChar(character)) {
                     chars.add(character);
                 }
             } while (bytesOfFile != -1);
@@ -49,7 +49,7 @@ public class TreeSetCharacters {
         }
     }
 
-    private boolean isLatChar(char character) {
+    private boolean isLatterChar(char character) {
         return (character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z');
     }
 }
