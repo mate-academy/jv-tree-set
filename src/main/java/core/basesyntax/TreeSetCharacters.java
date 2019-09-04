@@ -35,8 +35,9 @@ public class TreeSetCharacters {
         }
         StringBuilder line = new StringBuilder();
         for (char character : characters) {
-            if (line.length() < RESULT_LENGTH) {
-                line.append(character);
+            line.append(character);
+            if (line.length() == RESULT_LENGTH) {
+                break;
             }
         }
         return line.toString();
