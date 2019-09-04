@@ -1,5 +1,12 @@
 package core.basesyntax;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
  * Для цього використовуйте TreeSet. Файл містить букви латинського алфавіту і розділові знаки.</p>
@@ -17,7 +24,31 @@ package core.basesyntax;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) {
-        return null;
+
+    public String getUniqueCharacters(String fileName) throws IOException {
+        String dataFromFile = "";
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                dataFromFile += line;
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        dataFromFile = dataFromFile.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        Set<Character> sorted = new TreeSet<>();
+        for (int i = 0; i < dataFromFile.length(); i++) {
+            sorted.add(dataFromFile.charAt(i));
+        }
+        String result = "";
+        int counter = 0;
+        for (char charQ : sorted) {
+            result += charQ;
+            counter++;
+            if (counter >= 5) {
+                break;
+            }
+        }
+        return result;
     }
 }
