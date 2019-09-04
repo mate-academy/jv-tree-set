@@ -20,8 +20,9 @@ import java.util.TreeSet;
  * Результат 2: acf
  */
 public class TreeSetCharacters {
+    private static final int RESULT_LENGTH = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
-        final int RESULT_LENGTH = 5;
         Set<String> characters = new TreeSet<>();
         try (FileReader reader = new FileReader(new File(fileName))) {
             int character;
