@@ -29,10 +29,10 @@ public class TreeSetCharacters {
         try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
             while (fileReader.ready()) {
                 char[] letters = fileReader.readLine().replaceAll("[^a-zA-Z]", "")
-                    .toLowerCase().toCharArray();
+                        .toLowerCase().toCharArray();
                 for (int i = 0; i < letters.length; i++) {
-                     resultSet.add(letters[i]);
-                 }
+                    resultSet.add(letters[i]);
+                }
             }
             for (Character symbol : resultSet) {
                 resultBuilder.append(symbol);
@@ -42,7 +42,7 @@ public class TreeSetCharacters {
                 return result.substring(0, 5);
             }
             return result;
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
