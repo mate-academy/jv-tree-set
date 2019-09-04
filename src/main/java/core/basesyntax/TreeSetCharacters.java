@@ -26,20 +26,20 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws IOException {
-        final int numberLetters = 5;
-        final int letter_A = 65;
-        final int Letter_Z = 90;
-        final int letter_a = 97;
-        final int letter_z = 122;
+    static final int NUMBER_LETTERS = 5;
+    static final int LETTER_A = 65;
+    static final int LETTER_Z = 90;
+    static final int LETTER_a = 97;
+    static final int LETTER_z = 122;
 
+    public String getUniqueCharacters(String fileName) throws IOException {
         try (InputStream inputStream = Files.newInputStream(Paths.get(fileName))) {
             int bytesOfFile;
             StringBuilder onlyLetters = new StringBuilder();
             do {
                 bytesOfFile = inputStream.read();
-                if ((bytesOfFile >= letter_A && bytesOfFile <= Letter_Z)
-                        || (bytesOfFile >= letter_a && bytesOfFile <= letter_z)) {
+                if ((bytesOfFile >= LETTER_A && bytesOfFile <= LETTER_Z)
+                        || (bytesOfFile >= LETTER_a && bytesOfFile <= LETTER_z)) {
                     onlyLetters = onlyLetters.append((char) bytesOfFile);
                 }
             } while (bytesOfFile != -1);
@@ -47,7 +47,7 @@ public class TreeSetCharacters {
             Set<String> letters = new TreeSet<String>(Arrays.asList(lowerCase.split("")));
             Iterator alphabet = letters.iterator();
             String result = "";
-            for (int i = 0; i < numberLetters && alphabet.hasNext(); i++) {
+            for (int i = 0; i < NUMBER_LETTERS && alphabet.hasNext(); i++) {
                 result += alphabet.next();
             }
             return result;
