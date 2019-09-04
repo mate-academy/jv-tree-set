@@ -23,17 +23,22 @@ public class TreeSetCharacters {
     private static final int RESULT_LENGTH = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<String> characters = new TreeSet<>();
+        Set<Character> characters = new TreeSet<>();
         try (FileReader reader = new FileReader(new File(fileName))) {
             int character;
             while ((character = reader.read()) != -1) {
                 if (Character.isLetter(character)) {
                     character = Character.toLowerCase(character);
-                    characters.add(Character.toString(character));
+                    characters.add((char) character);
                 }
             }
         }
-        String line = String.join("", characters);
-        return (line.length() > RESULT_LENGTH) ? line.substring(0, 5) : line;
+        StringBuilder line = new StringBuilder();
+        for (char character : characters) {
+            if (line.length() < RESULT_LENGTH) {
+                line.append(character);
+            }
+        }
+        return line.toString();
     }
 }
