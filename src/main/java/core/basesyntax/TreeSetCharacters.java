@@ -27,19 +27,17 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         String result = "";
         try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName));) {
-            TreeSet<Character> stringTreeSet = new TreeSet<>();
+            TreeSet<Character> stringSet = new TreeSet<>();
             while (fileReader.ready()) {
                 String string = fileReader.readLine().toLowerCase().replaceAll("[^a-zA-Z]", "");
                 for (int i = 0; i < string.length(); i++) {
-                    stringTreeSet.add(string.charAt(i));
+                    stringSet.add(string.charAt(i));
                 }
             }
-            int setSize = stringTreeSet.size();
+            int setSize = stringSet.size() < ITEM_TO_RETURN ? stringSet.size() : ITEM_TO_RETURN;
             for (int i = 0; i < setSize; i++) {
-                if (i < ITEM_TO_RETURN) {
-                    result += stringTreeSet.first();
-                    stringTreeSet.remove(stringTreeSet.first());
-                }
+                result += stringSet.first();
+                stringSet.remove(stringSet.first());
             }
 
         } catch (IOException e) {
