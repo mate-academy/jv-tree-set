@@ -32,10 +32,7 @@ public class TreeSetCharacters {
             while (fileReader.ready()) {
                 String charsOnly = fileReader.readLine().toLowerCase().replaceAll("[^a-zA-Z]", "");
                 for (int i = 0; i < charsOnly.length(); i++) {
-                    char currentChar = charsOnly.charAt(i);
-                    if (!charSet.contains(currentChar)) {
-                        charSet.add(currentChar);
-                    }
+                    charSet.add(charsOnly.charAt(i));
                 }
             }
 
