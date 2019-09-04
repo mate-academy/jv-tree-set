@@ -43,7 +43,7 @@ public class TreeSetCharactersTest {
     }
 
     @Test
-    public void getExceptionWhenFileNotExist() {
+    public void getExceptionWhenFileNotExist() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         try {
             characters.getUniqueCharacters("file");
