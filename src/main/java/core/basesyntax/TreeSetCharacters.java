@@ -1,8 +1,9 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -24,29 +25,26 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     private static final int SYMBOL_QUANTITY = 5;
 
-    public String getUniqueCharacters(String file) throws IOException {
-        TreeSet<Character> symbols = new TreeSet<>();
-        StringBuilder result = new StringBuilder();
+    public String getUniqueCharacters(String fileName) throws IOException {
+        Set<Character> symbols = new TreeSet<>();
 
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
-            while (fileReader.ready()) {
-                result.append(fileReader.readLine());
+        for (String chars : Files.readAllLines(Paths.get(fileName))) {
+            for (Character element : chars.toLowerCase().toCharArray()) {
+                if (Character.isLetter(element)) {
+                    symbols.add(element);
+                }
             }
         }
 
-        char[] line = result.toString().replaceAll("[^a-zA-Z]", "").toLowerCase().toCharArray();
-        result.setLength(0);
-        for (Character i : line) {
-            symbols.add(i);
-        }
-
         int i = 0;
-        for (Character chars : symbols) {
-            result.append(chars);
+        StringBuilder result = new StringBuilder();
+        for (Character character : symbols) {
+            result.append(character);
             if (++i == SYMBOL_QUANTITY) {
                 break;
             }
         }
+
         return result.toString();
     }
 }
