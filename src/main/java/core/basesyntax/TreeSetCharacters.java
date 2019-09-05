@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -24,7 +25,7 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder resultBuilder = new StringBuilder();
-        TreeSet<Character> resultSet = new TreeSet<>();
+        Set<Character> resultSet = new TreeSet<>();
         try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
             while (fileReader.ready()) {
                 char[] letters = fileReader.readLine().replaceAll("[^a-zA-Z]", "")
@@ -35,12 +36,11 @@ public class TreeSetCharacters {
             }
             for (Character symbol : resultSet) {
                 resultBuilder.append(symbol);
+                if (resultBuilder.length() == 5) {
+                    return resultBuilder.toString();
+                }
             }
-            String result = resultBuilder.toString();
-            if (result.length() > 5) {
-                return result.substring(0, 5);
-            }
-            return result;
+            return resultBuilder.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
