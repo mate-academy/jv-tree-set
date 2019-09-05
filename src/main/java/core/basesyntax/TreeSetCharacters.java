@@ -23,10 +23,10 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public static String getUniqueCharacters(String fileName)throws IOException {
-        int outputLength = 5;
+    private static final int OUTPUT_LENGTH = 5;
+
+    public static String getUniqueCharacters(String fileName) throws IOException {
         String line;
-        String[] parsed;
         Set<String> treeSet = new TreeSet<String>();
         StringBuffer stringBuilder = new StringBuffer();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
@@ -35,18 +35,14 @@ public class TreeSetCharacters {
                 stringBuilder.append(line);
             }
             line = stringBuilder.toString().strip().toLowerCase().replaceAll("[^A-Za-z]", "");
-            parsed = new String[line.length()];
-
             for (int i = 0; i < line.length(); i++) {
-                parsed[i] = Character.toString(line.charAt(i));
+                treeSet.add(Character.toString(line.charAt(i)));
             }
-            for (String c : parsed) {
-                treeSet.add(c);
+            String result = treeSet.toString().replaceAll("[^A-Za-z]", "");
+            if (treeSet.size() >= OUTPUT_LENGTH) {
+                return result.substring(0, OUTPUT_LENGTH);
             }
-            if (treeSet.size() >= outputLength) {
-                return treeSet.toString().replaceAll("[^A-Za-z]", "").substring(0, outputLength);
-            }
-            return treeSet.toString().replaceAll("[^A-Za-z]", "");
+            return result;
         }
     }
 }
