@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -24,23 +23,27 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        BufferedReader input = new BufferedReader(new FileReader(fileName));
-        String nextString = null;
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> uniqueChars = new TreeSet<>();
-        while (true) {
-            try {
-                if ((nextString = input.readLine()) == null) {
-                    break;
+        try (BufferedReader input = new BufferedReader(new FileReader(fileName))) {
+            String nextString = null;
+            while (true) {
+                try {
+                    if ((nextString = input.readLine()) == null) {
+                        break;
+                    }
+                    String charsString = nextString.toLowerCase().replaceAll("[^a-z]", "");
+                    for (int i = 0; i < charsString.length(); i++) {
+                        uniqueChars.add(charsString.charAt(i));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                String charsString = nextString.toLowerCase().replaceAll("[^a-z]", "");
-                for (int i = 0; i < charsString.length(); i++) {
-                    uniqueChars.add(charsString.charAt(i));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            throw e;
         }
+
         String result = "";
         for (char c : uniqueChars) {
             result += c;
@@ -50,4 +53,5 @@ public class TreeSetCharacters {
         }
         return result;
     }
+
 }
