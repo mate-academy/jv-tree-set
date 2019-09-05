@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**	/**
- * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.	 * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
- * Для цього використовуйте TreeSet. Файл містить букви латинського алфавіту і розділові знаки.</p>	 * Для цього використовуйте TreeSet. Файл містить букви латинського алфавіту і розділові знаки.</p>
+/**
+ * <p>Реалізуйте метод `getUniqueCharacters(String fileName)
+ * Для цього використовуйте TreeSet. Файл містить букви латинського алфавіту і розділові знаки.</p>
  @@ -17,7 +24,28 @@
-  * Результат 2: acf</p>	 * Результат 2: acf</p>
+  * Результат 2: acf</p>.
  */
 
 public class TreeSetCharacters {
