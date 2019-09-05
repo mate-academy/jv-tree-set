@@ -23,9 +23,9 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    public static final int LENGTH_FIFTH = 5;
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        final int AMOUNT_CHARACTERS = 5;
         String strigToreturn = new String();
         Set<Character> uniqueCharacters = new TreeSet<>();
         try (FileReader file = new FileReader(fileName)) {
@@ -41,8 +41,8 @@ public class TreeSetCharacters {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return strigToreturn.length() > AMOUNT_CHARACTERS
-                ? strigToreturn.substring(0, AMOUNT_CHARACTERS)
+        return strigToreturn.length() > LENGTH_FIFTH
+                ? strigToreturn.substring(0, LENGTH_FIFTH)
                 : strigToreturn;
     }
 }
