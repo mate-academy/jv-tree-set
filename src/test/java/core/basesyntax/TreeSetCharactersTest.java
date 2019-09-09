@@ -14,7 +14,7 @@ public class TreeSetCharactersTest {
     public void getFiveUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file1.txt");
-        Assert.assertEquals("Test faild with result: " + actualResult,
+        Assert.assertEquals("Test failed with result: " + actualResult,
                 FIVE_CHARACTERS, actualResult);
     }
 
@@ -22,7 +22,7 @@ public class TreeSetCharactersTest {
     public void getLessThenFiveUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file2.txt");
-        Assert.assertEquals("Test faild with result: " + actualResult,
+        Assert.assertEquals("Test failed with result: " + actualResult,
                 FOUR_CHARACTERS, actualResult);
     }
 
@@ -30,7 +30,7 @@ public class TreeSetCharactersTest {
     public void getEmptyUniqueCharacters() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file3.txt");
-        Assert.assertEquals("Test faild with result: " + actualResult,
+        Assert.assertEquals("Test failed with result: " + actualResult,
                 WITHOUT_CHARACTERS, actualResult);
     }
 
@@ -38,7 +38,7 @@ public class TreeSetCharactersTest {
     public void getEmptyUniqueCharactersFromNumbers() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
         String actualResult = characters.getUniqueCharacters("file4.txt");
-        Assert.assertEquals("Test faild with result: " + actualResult,
+        Assert.assertEquals("Test failed with result: " + actualResult,
                 WITHOUT_CHARACTERS, actualResult);
     }
 
