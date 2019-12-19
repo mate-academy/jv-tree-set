@@ -36,11 +36,9 @@ public class TreeSetCharacters {
             set.add(symbol);
         }
         StringBuilder result = new StringBuilder();
-        int count = 0;
         for (Character symbol : set) {
             result.append(symbol);
-            count++;
-            if (count == 5) {
+            if (result.length() >= 5) {
                 break;
             }
         }
