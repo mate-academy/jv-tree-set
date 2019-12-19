@@ -24,15 +24,20 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<String> myTreeSet = new TreeSet<>();
-        File file = new File(fileName);
-        FileReader fr = new FileReader(file);
-        int data;
-        do {
-            data = fr.read();
-            myTreeSet.add(String.valueOf((char) data).toLowerCase());
-        } while (data != -1);
-        String result = myTreeSet.toString().replaceAll("[^a-z]", "");
+        Set<Character> myTreeSet = new TreeSet<>();
+        try (FileReader fileReader = new FileReader(new File(fileName))) {
+            char data;
+            while (fileReader.ready()) {
+                data = (char) fileReader.read();
+                if (Character.isLetter(data)) {
+                    myTreeSet.add(Character.toLowerCase(data));
+                }
+            }
+        }
+        String result = "";
+        for (Character element : myTreeSet) {
+            result += element;
+        }
         if (result.length() > 5) {
             result = result.substring(0, 5);
         }
