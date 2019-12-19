@@ -3,9 +3,9 @@ package core.basesyntax;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -25,16 +25,16 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<String> hashTree = new TreeSet<>();
+        Set<Character> hashTree = new TreeSet<>();
         try {
-            String[] s = Files.readString(Paths.get(fileName)).toLowerCase()
-                    .replaceAll("[^a-zA-Z]", " ").split("");
-            hashTree = new TreeSet<String>(Arrays.asList(s));
+            hashTree = new TreeSet<>(Files.readString(Paths.get(fileName)).toLowerCase()
+                    .replaceAll("[^a-zA-Z]", " ")
+                    .chars().mapToObj(c -> (char) c).collect(Collectors.toList()));
         } catch (IOException ex) {
             ex.getStackTrace();
         }
         StringBuilder stringBuilder = new StringBuilder();
-        for (String s : hashTree) {
+        for (Character s : hashTree) {
             if (stringBuilder.length() > 5) {
                 break;
             }
