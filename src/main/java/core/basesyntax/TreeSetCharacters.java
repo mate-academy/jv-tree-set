@@ -25,28 +25,27 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        String result = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            Set<Character> chars = new TreeSet<>();
+        Set<Character> chars = new TreeSet<>();
 
-            while ((line = bufferedReader.readLine()) != null) {
-                String cleanLine = line.replaceAll("[^A-Za-z]", "");
-                for (Character c: cleanLine.toLowerCase().toCharArray()) {
-                    chars.add(c);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            while (bufferedReader.ready()) {
+                char character = (char) bufferedReader.read();
+                if (Character.isLetter(character)) {
+                    chars.add(Character.toLowerCase(character));
                 }
             }
-
-            StringBuilder charsSet = new StringBuilder();
-            for (Character c: chars) {
-                charsSet.append(c);
-            }
-            int n = Math.min(chars.size(), 5);
-            result = charsSet.toString().substring(0, n);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             throw new FileNotFoundException("There is no such file");
         }
-        return result;
+
+        StringBuilder charsSet = new StringBuilder();
+        for (Character c: chars) {
+            charsSet.append(c);
+            if (charsSet.length() >= 5) {
+                break;
+            }
+        }
+        return charsSet.toString();
     }
 }
