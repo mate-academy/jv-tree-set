@@ -37,12 +37,11 @@ public class TreeSetCharacters {
         StringBuilder strBuilder = new StringBuilder();
         for (Character element : myTreeSet) {
             strBuilder.append(element);
+            if (strBuilder.length() >= 5) {
+                break;
+            }
         }
-        String result = strBuilder.toString();
-        if (result.length() > 5) {
-            result = result.substring(0, 5);
-        }
-        return result;
+        return strBuilder.toString();
     }
 }
 
