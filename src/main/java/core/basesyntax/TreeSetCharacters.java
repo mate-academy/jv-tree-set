@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.TreeSet;
 
 /**
@@ -25,14 +24,18 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder line = new StringBuilder();
-        String words = Files.readString(Paths.get(fileName));
-        TreeSet<String> letters = new TreeSet<>(Arrays.asList(words.toLowerCase()
-                .replaceAll("[^a-z]", "").split("")));
+        String words = Files.readString(Paths.get(fileName)).toLowerCase();
+        TreeSet<Character> letters = new TreeSet<>();
+
+        for (int i = 0; i < words.length(); i++) {
+            if (Character.isLetter(words.charAt(i))) {
+                letters.add(words.charAt(i));
+            }
+        }
         int i = 0;
-        for (String letter : letters) {
+        for (Character letter : letters) {
             line.append(letter);
-            i++;
-            if (i == 5) {
+            if (++i == 5) {
                 break;
             }
         }
