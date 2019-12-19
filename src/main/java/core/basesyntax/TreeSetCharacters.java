@@ -34,9 +34,10 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            if (i < set.toArray().length) {
-                stringBuilder.append(set.toArray()[i]);
+        for (Character c : set) {
+            stringBuilder.append(c);
+            if (stringBuilder.length() >= 5) {
+                break;
             }
         }
         return stringBuilder.toString();
