@@ -32,7 +32,7 @@ public class TreeSetCharacters {
         }
 
         StringBuilder letters = new StringBuilder();
-        for (char character  : set) {
+        for (char character : set) {
             letters.append(character);
             if (letters.length() >= 5) {
                 break;
