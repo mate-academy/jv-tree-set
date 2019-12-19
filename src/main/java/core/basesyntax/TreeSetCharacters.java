@@ -38,12 +38,12 @@ public class TreeSetCharacters {
             throw new FileNotFoundException();
         }
         Set<String> listOfUniqueLetters = new TreeSet<>(Arrays.asList(words.split("")));
-        StringBuilder ch = new StringBuilder();
-        for (String c : listOfUniqueLetters) {
-            if (ch.length() < 5) {
-                ch.append(c);
+        StringBuilder finalString = new StringBuilder();
+        for (String element : listOfUniqueLetters) {
+            if (finalString.length() < 5) {
+                finalString.append(element);
             }
         }
-        return ch.toString();
+        return finalString.toString();
     }
 }
