@@ -40,8 +40,8 @@ public class TreeSetCharacters {
         }
 
         StringBuilder charsSet = new StringBuilder();
-        for (Character c: chars) {
-            charsSet.append(c);
+        for (Character character: chars) {
+            charsSet.append(character);
             if (charsSet.length() >= 5) {
                 break;
             }
