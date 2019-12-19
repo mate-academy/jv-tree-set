@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,16 +30,14 @@ public class TreeSetCharacters {
         for (char value : chars) {
             set.add(value);
         }
-        Iterator<Character> iterator = set.iterator();
-        StringBuilder stringFromFile = new StringBuilder();
-        int i = 0;
-        while (iterator.hasNext()) {
-            stringFromFile.append(iterator.next());
-            i++;
-            if (i > 4) {
+
+        StringBuilder letters = new StringBuilder();
+        for (char c : set) {
+            letters.append(c);
+            if (letters.length() >= 5) {
                 break;
             }
         }
-        return stringFromFile.toString();
+        return letters.toString();
     }
 }
