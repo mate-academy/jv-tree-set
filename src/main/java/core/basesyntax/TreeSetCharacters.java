@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,19 +28,25 @@ public class TreeSetCharacters {
     private static final String REGEX_NON_WORDS = "[^a-z]";
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+        String words;
         try {
-            List<String> listOfWords = Files.readAllLines(Paths.get(fileName));
-            Set<String> listOfUniqueLetters = new TreeSet<>();
-            for (char value : listOfWords
-                    .toString()
+            words = Files.readString(Paths.get(fileName))
                     .toLowerCase()
-                    .toCharArray()) {
-                listOfUniqueLetters.add(value + "");
-            }
-            String result = listOfUniqueLetters.toString().replaceAll(REGEX_NON_WORDS, "");
-            return result.substring(0, Math.min(result.length(), 5));
+                    .replaceAll(REGEX_NON_WORDS, "");
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
+        Set<Character> listOfUniqueLetters = new TreeSet<>();
+        for (char value : words
+                .toCharArray()) {
+            listOfUniqueLetters.add(value);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Character ch : listOfUniqueLetters) {
+            if (sb.length() < 5) {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
     }
 }
