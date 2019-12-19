@@ -26,15 +26,13 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        List<String> list = new ArrayList<>();
-        try {
-            String unsorted = Files.readString(Paths.get(fileName));
-            String[] letters = unsorted.toLowerCase().replaceAll("[^a-z]+", "").split("");
-            list = Arrays.asList(letters);
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<Character> list = new ArrayList<>();
+        String unsorted = Files.readString(Paths.get(fileName));
+        char[] letters = unsorted.toLowerCase().replaceAll("[^a-z]+", "").toCharArray();
+        for (char item : letters) {
+            list.add(item);
         }
-        TreeSet<String> container = new TreeSet<>(list);
+        TreeSet<Character> container = new TreeSet<>(list);
         StringBuilder result = new StringBuilder();
         while (container.size() != 0 && result.length() < 5) {
             result.append(container.pollFirst());
