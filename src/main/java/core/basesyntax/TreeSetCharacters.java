@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,16 +32,17 @@ public class TreeSetCharacters {
         String string = Files.readString(Paths.get(fileName));
         string = string.toLowerCase().replaceAll("[^a-z]", "");
         Set<Character> set = new TreeSet<>();
-        for (char ch : string.toCharArray()) {
-            set.add(ch);
+        for (char symbol : string.toCharArray()) {
+            set.add(symbol);
         }
         StringBuilder result = new StringBuilder();
-        List<Character> list = new ArrayList<>(set);
-        for (int i = 0; i < list.size(); i++) {
-            if (i == 5) {
+        int count = 0;
+        for (Character symbol : set) {
+            result.append(symbol);
+            count++;
+            if (count == 5) {
                 break;
             }
-            result.append(list.get(i));
         }
         return result.toString();
     }
