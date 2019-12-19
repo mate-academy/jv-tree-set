@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -36,17 +37,13 @@ public class TreeSetCharacters {
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
-        Set<Character> listOfUniqueLetters = new TreeSet<>();
-        for (char value : words
-                .toCharArray()) {
-            listOfUniqueLetters.add(value);
-        }
-        StringBuilder sb = new StringBuilder();
-        for (Character ch : listOfUniqueLetters) {
-            if (sb.length() < 5) {
-                sb.append(ch);
+        Set<String> listOfUniqueLetters = new TreeSet<>(Arrays.asList(words.split("")));
+        StringBuilder ch = new StringBuilder();
+        for (String c : listOfUniqueLetters) {
+            if (ch.length() < 5) {
+                ch.append(c);
             }
         }
-        return sb.toString();
+        return ch.toString();
     }
 }
