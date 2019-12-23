@@ -23,18 +23,20 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        BufferedReader file = new BufferedReader(new FileReader(fileName));
-        TreeSet<Character> treeSetOfCharsFromFile = new TreeSet<>();
-        String lineFromFile;
         StringBuilder result = new StringBuilder();
-        outer:
-        while ((lineFromFile = file.readLine()) != null) {
-            lineFromFile = lineFromFile.toLowerCase();
-            char[] arrayFileLetters = lineFromFile.toCharArray();
-            for (int i = 0; i < arrayFileLetters.length; i++) {
-                if (Character.isLetter(arrayFileLetters[i])) {
-                    treeSetOfCharsFromFile.add(arrayFileLetters[i]);
+        TreeSet<Character> treeSetOfCharsFromFile = new TreeSet<>();
+        try (BufferedReader file = new BufferedReader(new FileReader(fileName))) {
+            String lineFromFile;
+            outer:
+            while ((lineFromFile = file.readLine()) != null) {
+                lineFromFile = lineFromFile.toLowerCase();
+                char[] arrayFileLetters = lineFromFile.toCharArray();
+                for (int i = 0; i < arrayFileLetters.length; i++) {
+                    if (Character.isLetter(arrayFileLetters[i])) {
+                        treeSetOfCharsFromFile.add(arrayFileLetters[i]);
+                    }
                 }
+
             }
         }
         for (Character item : treeSetOfCharsFromFile) {
