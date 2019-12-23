@@ -30,20 +30,22 @@ public class TreeSetCharacters {
         Set<Character> charactersSet = new TreeSet<>();
 
         for (String charsString : stringsList) {
-            char[] charArray = charsString.toLowerCase().replaceAll("[^a-z]", "").toCharArray();
+            char[] charArray = charsString.toLowerCase().toCharArray();
             for (char chars : charArray) {
-                charactersSet.add(chars);
+                if (Character.isLetter(chars)) {
+                    charactersSet.add(chars);
+                }
             }
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        int i = 1;
+        int counter = 1;
         for (char character:charactersSet) {
             stringBuilder.append(character);
-            if (i == 5) {
+            if (counter == 5) {
                 break;
             }
-            i++;
+            counter++;
         }
         return stringBuilder.toString();
     }
