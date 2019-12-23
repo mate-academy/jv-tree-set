@@ -26,24 +26,20 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder builder = new StringBuilder();
+        Set<String> remoteDuplicates = new TreeSet<>();
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(new File(fileName)))) {
+
             int sumbol;
             while ((sumbol = bufferedReader.read()) != -1) {
                 if (Character.isLetter(sumbol)) {
-                    String lowwer = String.valueOf((char) sumbol);
-                    builder.append(lowwer.toLowerCase());
+                    String lowwerCase = String.valueOf((char) sumbol);
+                    remoteDuplicates.add(lowwerCase.toLowerCase());
                 }
             }
         }
-
-        Set<Character> remoteDuplicates = new TreeSet<>();
-        for (int i = 0; i < builder.length(); i++) {
-            remoteDuplicates.add(builder.charAt(i));
-        }
-        builder.delete(0, builder.length());
-        for (Character chars : remoteDuplicates) {
-            builder.append(chars);
+        for (String latters : remoteDuplicates) {
+            builder.append(latters);
             if (builder.length() >= 5) {
                 break;
             }
