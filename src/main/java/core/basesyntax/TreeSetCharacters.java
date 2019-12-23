@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.TreeSet;
 
 /**
@@ -27,50 +26,30 @@ public class TreeSetCharacters {
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
 
-        TreeSet<Character> set = new TreeSet<Character>(new Comparator<Character>() {
-            @Override
-            public int compare(Character o1, Character o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        StringBuilder sb = new StringBuilder();
+        TreeSet<Character> set = new TreeSet<>();
+        StringBuilder readFromFile = new StringBuilder();
         if (fileName != null) {
-            try
-                    (FileReader fileReader = new FileReader(fileName);
-                     BufferedReader reader = new BufferedReader(fileReader);) {
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 while (reader.ready()) {
-                    sb.append(reader.readLine());
+                    readFromFile.append(reader.readLine());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } else {
-            throw new
-                    FileNotFoundException("Файлу не існує");
         }
 
-        String str = sb.toString().toLowerCase();
+        String str = readFromFile.toString().toLowerCase();
         char[] array = str.toCharArray();
         for (int i = 0; i < array.length; i++) {
             if (Character.isLetter(array[i])) {
                 set.add(array[i]);
             }
         }
-        String res = "";
-        if (set.isEmpty()) {
-            return res;
+        StringBuilder res = new StringBuilder();
+        while (set.size() != 0 && res.length() < 5) {
+            res.append(set.pollFirst());
         }
-        if (set.size() > 5) {
-            for (int i = 0; i < 5; i++) {
-                res += set.pollFirst();
-            }
-        }
-        if (set.size() < 5) {
-            for (int i = 0; i < set.size() + i; i++) {
-                res += set.pollFirst();
-            }
-        }
-        return res;
+        return res.toString();
     }
 }
