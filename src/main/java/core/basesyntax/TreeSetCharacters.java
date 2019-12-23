@@ -27,9 +27,9 @@ public class TreeSetCharacters {
         Path path = Paths.get(fileName);
         String reader = Files.readString(path).toLowerCase();
         TreeSet<String> treeSet = new TreeSet<>();
-        for (char i : reader.toCharArray()) {
-            if (Character.isLetter(i)) {
-                treeSet.add(String.valueOf(i));
+        for (char localChar : reader.toCharArray()) {
+            if (Character.isLetter(localChar)) {
+                treeSet.add(String.valueOf(localChar));
             }
         }
         StringBuilder result = new StringBuilder();
