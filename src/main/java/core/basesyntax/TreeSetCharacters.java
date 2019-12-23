@@ -25,11 +25,12 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Path path = Paths.get(fileName);
-        String reader = Files.readString(path);
-        String[] s  = reader.replaceAll("[^a-zA-Z]","").toLowerCase().split("");
+        String reader = Files.readString(path).toLowerCase();
         TreeSet<String> treeSet = new TreeSet<>();
-        for (String i:s) {
-            treeSet.add(i);
+        for (char i : reader.toCharArray()) {
+            if (Character.isLetter(i)) {
+                treeSet.add(String.valueOf(i));
+            }
         }
         StringBuilder result = new StringBuilder();
         for (int i = 0, size = treeSet.size(); i < 5 && i < size; i++) {
