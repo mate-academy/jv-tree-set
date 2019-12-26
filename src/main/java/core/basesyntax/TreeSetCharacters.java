@@ -1,10 +1,8 @@
 package core.basesyntax;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,15 +24,16 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        if (!new File(fileName).exists()) {
-            throw new FileNotFoundException("Such file doesn't exist!");
-        }
         StringBuilder result = new StringBuilder();
-        char[] chars = Files.readString(Paths.get(fileName)).toLowerCase()
-                .replaceAll("[^A-Za-z]", "").toCharArray();
         Set<Character> fileCharacters = new TreeSet<>();
-        for (Character fileCharacter : chars) {
-            fileCharacters.add(fileCharacter);
+        try (FileReader fileReader = new FileReader(new File(fileName))) {
+            char data;
+            while (fileReader.ready()) {
+                data = (char) fileReader.read();
+                if (Character.isLetter(data)) {
+                    fileCharacters.add(Character.toLowerCase(data));
+                }
+            }
         }
         for (Character fileCharacter : fileCharacters) {
             result.append(fileCharacter);
