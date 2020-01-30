@@ -3,6 +3,7 @@ package core.basesyntax;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class TreeSetCharactersTest {
@@ -47,8 +48,11 @@ public class TreeSetCharactersTest {
         TreeSetCharacters characters = new TreeSetCharacters();
         try {
             characters.getUniqueCharacters("file");
+        } catch (FileNotFoundException e) {
+            return;
         } catch (IOException e) {
-            e.printStackTrace();
+            Assert.fail("FileNotFoundException should be thrown");
         }
+        Assert.fail("FileNotFoundException should be thrown");
     }
 }
