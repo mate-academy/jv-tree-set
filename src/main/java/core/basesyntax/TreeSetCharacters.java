@@ -8,13 +8,12 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         TreeSet<Character> treeSet = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
-            boolean hasNext = fileReader.ready();
-            while (hasNext) {
+            while (fileReader.ready()) {
                 char a = (char) fileReader.read();
-                if (Character.isAlphabetic(a)) {
+                if (Character.isLetter(a)) {
                     treeSet.add(Character.toLowerCase(a));
                 }
-                hasNext = fileReader.ready();
+                fileReader.ready();
             }
         }
         StringBuilder sb = new StringBuilder();
