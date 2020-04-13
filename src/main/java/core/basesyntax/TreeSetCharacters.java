@@ -39,10 +39,10 @@ public class TreeSetCharacters {
             }
         }
         Iterator<Character> iterator = charSet.iterator();
-        String result = "";
+        StringBuilder result = new StringBuilder();
         while (iterator.hasNext()) {
-            result += iterator.next();
+            result.append(iterator.next());
         }
-        return result.length() < 6 ? result : result.substring(0, 5);
+        return result.length() < 6 ? result.toString() : result.substring(0, 5);
     }
 }
