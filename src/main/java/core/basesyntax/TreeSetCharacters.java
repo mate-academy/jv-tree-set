@@ -25,11 +25,6 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
 
-    public static void main(String[] args) throws IOException {
-        TreeSetCharacters a = new TreeSetCharacters();
-        System.out.println(a.getUniqueCharacters("file2.txt"));
-    }
-
     public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder result = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
