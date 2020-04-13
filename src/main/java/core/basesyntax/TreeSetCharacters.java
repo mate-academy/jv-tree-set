@@ -27,12 +27,14 @@ public class TreeSetCharacters {
 
         TreeSet<Character> set = new TreeSet<>();
         File file = new File(fileName);
+
         try (FileReader fileReader = new FileReader(file)) {
             BufferedReader br = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                for (char ch : line.toLowerCase().replaceAll("[^a-z]", "").toCharArray()) {
-                    set.add(ch);
+            int character;
+            while ((character = br.read()) != -1) {
+                Character c = (char)character;
+                if (Character.isAlphabetic(c)) {
+                    set.add(Character.toLowerCase(c));
                 }
             }
         }
