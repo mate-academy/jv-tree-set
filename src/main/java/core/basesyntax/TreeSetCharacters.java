@@ -25,20 +25,20 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder notFormated = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName));) {
             String line;
             while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line.toLowerCase());
+                notFormated.append(line.toLowerCase());
             }
         }
-        Set<Character> set = new TreeSet<>();
-        for (int i = 0; i < stringBuilder.length(); i++) {
-            if (Character.isLetter(stringBuilder.charAt(i))) {
-                set.add(stringBuilder.charAt(i));
+        Set<Character> charSet = new TreeSet<>();
+        for (int i = 0; i < notFormated.length(); i++) {
+            if (Character.isLetter(notFormated.charAt(i))) {
+                charSet.add(notFormated.charAt(i));
             }
         }
-        Iterator<Character> iterator = set.iterator();
+        Iterator<Character> iterator = charSet.iterator();
         String result = "";
         while (iterator.hasNext()) {
             result += iterator.next();
