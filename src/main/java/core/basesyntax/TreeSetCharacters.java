@@ -36,7 +36,7 @@ public class TreeSetCharacters {
                 set.add(symbol);
             }
         } catch (IOException e) {
-            throw new FileNotFoundException(fileName + " Was Not Find");
+            throw new FileNotFoundException(fileName + " Was Not Found");
         }
         StringBuilder symbolList = new StringBuilder();
         int count = 1;
