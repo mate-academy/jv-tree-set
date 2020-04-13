@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -23,33 +22,27 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder fileContent = new StringBuilder("");
         try (FileReader checkFile = new FileReader(fileName)) {
             int charContent;
             while ((charContent = checkFile.read()) != -1) {
                 fileContent.append((char) charContent);
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException();
         }
-        String fileNameEdited = fileContent.toString().replaceAll("[^a-zA-Z]+", "").toLowerCase();
+        String fileNameEdited = fileContent.toString().toLowerCase();
         TreeSet<Character> fileNameChars = new TreeSet<>();
         for (int i = 0; i < fileNameEdited.length(); i++) {
-            fileNameChars.add(fileNameEdited.charAt(i));
+            if (Character.isLetter(fileNameEdited.charAt(i))) {
+                fileNameChars.add(fileNameEdited.charAt(i));
+            }
         }
         StringBuilder fileNameToReturn = new StringBuilder("");
         Iterator iterator = fileNameChars.iterator();
-        if (fileNameChars.size() < 5) {
-            while (iterator.hasNext()) {
-                fileNameToReturn.append(iterator.next());
-            }
-        } else {
-            int i = 0;
-            while (i != 5 && iterator.hasNext()) {
-                fileNameToReturn.append(iterator.next());
-                i++;
-            }
+        int i = 0;
+        while (i != 5 && iterator.hasNext()) {
+            fileNameToReturn.append(iterator.next());
+            i++;
         }
         return fileNameToReturn.toString();
     }
