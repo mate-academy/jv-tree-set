@@ -37,6 +37,6 @@ public class TreeSetCharacters {
         for (char i : characters) {
             result.append(i);
         }
-        return result.length() <= 5 ? result.toString() : result.substring(0, 5).toString();
+        return result.length() <= 5 ? result.toString() : result.substring(0, 5);
     }
 }
