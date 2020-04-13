@@ -42,8 +42,7 @@ public class TreeSetCharacters {
         }
         String result = characters.toString()
                 .replaceAll(", ", "")
-                .replace("[", "")
-                .replace("]","");
+                .substring(1, characters.size());
         return characters.size() > 5
                 ? result.substring(0,5) : result;
     }
