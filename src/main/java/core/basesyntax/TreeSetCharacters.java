@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,13 +25,13 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> uniqueChars = new TreeSet<>();
-        try (FileInputStream inputStream = new FileInputStream(fileName)) {
-            int data;
-            while ((data = inputStream.read()) != -1) {
-                if (Character.isAlphabetic(data)) {
-                    char ch = (char) Character.toLowerCase(data);
-                    uniqueChars.add(ch);
+        try (FileReader fileReader = new FileReader(fileName)) {
+            int data = fileReader.read();
+            while (data != -1) {
+                if (Character.isLetter(data)) {
+                    uniqueChars.add((char) Character.toLowerCase(data));
                 }
+                data = fileReader.read();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class TreeSetCharacters {
         int n = 0;
         for (char c : uniqueChars) {
             result.append(c);
-            if (++n >= 5) {
+            if (++n == 5) {
                 break;
             }
         }
