@@ -3,7 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -38,7 +38,7 @@ public class TreeSetCharacters {
         for (Character ch: result.toString().toCharArray()) {
             bufferedTree.add(ch);
         }
-        List<Character> end = new ArrayList<>();
+        List<Character> end = new LinkedList<>();
         end.addAll(bufferedTree);
         result = new StringBuilder();
         for (int i = 0; i < end.size(); i++) {
