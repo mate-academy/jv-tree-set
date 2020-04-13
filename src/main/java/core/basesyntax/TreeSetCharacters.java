@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Set;
@@ -27,7 +26,6 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        int count = 5;
         StringBuilder result = new StringBuilder();
         Set<Character> set = new TreeSet<>();
         try {
@@ -36,13 +34,11 @@ public class TreeSetCharacters {
             for (int i = 0; i < allFile.length(); i++) {
                 set.add(allFile.charAt(i));
             }
-        } catch (NoSuchFileException e) {
-            throw new FileNotFoundException();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FileNotFoundException("File not found");
         }
         Iterator<Character> iterator = set.iterator();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < 5; i++) {
             if (iterator.hasNext()) {
                 result.append(iterator.next());
             }
