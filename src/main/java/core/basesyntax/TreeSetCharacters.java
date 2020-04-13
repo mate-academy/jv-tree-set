@@ -35,10 +35,12 @@ public class TreeSetCharacters {
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
-        String textStr = text.toString().toLowerCase().replaceAll("[^a-z]", "");
+        String textStr = text.toString().toLowerCase();
         Set<Character> chars = new TreeSet<>();
         for (int i = 0; i < textStr.length(); i++) {
-            chars.add(textStr.charAt(i));
+            if (Character.isAlphabetic(textStr.charAt(i))) {
+                chars.add(textStr.charAt(i));
+            }
         }
         StringBuilder result = new StringBuilder();
         for (char ch : chars) {
