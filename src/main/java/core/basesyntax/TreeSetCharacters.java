@@ -28,13 +28,14 @@ public class TreeSetCharacters {
         if (!Files.exists(Paths.get(fileName))) {
             throw new FileNotFoundException();
         }
-        String s = "";
-        s = Files.readString(Paths.get(fileName)).replaceAll("[^a-zA-Z]", "").toLowerCase();
+        StringBuilder sb = new StringBuilder(Files.readString(Paths.get(fileName)).toLowerCase());
         Set<Character> charSet = new TreeSet<>();
-        for (int i = 0; i < s.length(); i++) {
-            charSet.add(s.charAt(i));
+        for (int i = 0; i < sb.length(); i++) {
+            if (Character.isAlphabetic(sb.charAt(i))){
+                charSet.add(sb.charAt(i));
+            }
         }
-        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
         int count = 0;
         for (Character c : charSet) {
             sb.append(c);
