@@ -2,29 +2,36 @@ package core.basesyntax;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 public class TreeSetCharacters {
+    public static void main(String[] args) throws IOException {
+        FileReader filereader = new FileReader("file1.txt");
+        boolean data = filereader.ready();
+        String b = "";
+        while (data) {
+            char a = (char) filereader.read();
+            if (Character.isAlphabetic(a)) {
+                b = b + a;
+            }
+            data = filereader.ready();
+        }
+    }
+
     public String getUniqueCharacters(String fileName) throws IOException {
         TreeSet<Character> treeSet = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
-            int data = fileReader.read();
-            System.out.println(data);
-            while (data != -1) {
-                if (Character.isAlphabetic(data)) {
-                    treeSet.add((char) Character.toLowerCase(data));
+            boolean hasNext = fileReader.ready();
+            while (hasNext) {
+                char a = (char) fileReader.read();
+                if (Character.isAlphabetic(a)) {
+                    treeSet.add(Character.toLowerCase(a));
                 }
-                data = fileReader.read();
+                hasNext = fileReader.ready();
             }
         }
-        Iterator<Character> iterator = treeSet.iterator();
         StringBuilder sb = new StringBuilder();
-        int count = 0;
-        while (count < 5 && count < treeSet.size()) {
-            sb.append(iterator.next());
-            count++;
-        }
-        return sb.toString();
+        sb.append(treeSet.toString().replaceAll(" |,|\\]|\\[",""));
+        return treeSet.size() < 5 ? sb.toString() : sb.toString().substring(0, 5);
     }
 }
