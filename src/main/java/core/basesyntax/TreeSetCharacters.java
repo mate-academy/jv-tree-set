@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -26,7 +25,7 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     private static final int MAX_NUMBER_OF_CHARS_IN_RESULT = 5;
 
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> characterTreeSet = new TreeSet<>();
         try (FileReader reader = new FileReader(new File(fileName))) {
             for (int ch = reader.read(); ch != -1; ch = reader.read()) {
@@ -34,10 +33,6 @@ public class TreeSetCharacters {
                     characterTreeSet.add(Character.toLowerCase((char) ch));
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw e;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         StringBuilder sb = new StringBuilder();
