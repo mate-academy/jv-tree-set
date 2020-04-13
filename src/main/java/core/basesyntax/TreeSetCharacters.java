@@ -32,8 +32,10 @@ public class TreeSetCharacters {
             while (scan.hasNextLine()) {
                 allDocument.append(scan.nextLine());
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File Not Found"+e);
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            e.printStackTrace();
         }
         Set<Character> result = new TreeSet<>();
         for (int i = 0; i < allDocument.length(); i++) {
