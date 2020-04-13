@@ -1,9 +1,7 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,21 +24,18 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> set = new TreeSet<>();
-        try {
-            String line = Files.readString(Paths.get(fileName));
-            char[] lineList = line
-                    .toLowerCase()
-                    .replaceAll("[^a-z]", "")
-                    .toCharArray();
-            for (char symbol : lineList) {
-                set.add(symbol);
+        try (FileReader fileReader = new FileReader(fileName)) {
+            int data = fileReader.read();
+            while (data != -1) {
+                if (Character.isAlphabetic(data)) {
+                    set.add((char) Character.toLowerCase(data));
+                }
+                data = fileReader.read();
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException(fileName + " Was Not Found");
         }
         StringBuilder symbolList = new StringBuilder();
         int count = 1;
-        for (char i: set) {
+        for (char i : set) {
             symbolList.append(i);
             if (count == 5) {
                 break;
