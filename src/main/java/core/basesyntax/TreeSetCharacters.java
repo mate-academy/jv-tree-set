@@ -1,11 +1,8 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -27,32 +24,28 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         String line = "";
+        int nextChar = 0;
         TreeSet<Character> treeSet = new TreeSet<>();
-        try (BufferedReader fin = new BufferedReader(new FileReader(new File(fileName)))) {
-            while ((line = fin.readLine()) != null) {
-                line = line.replaceAll("[0-9]*\\W*", "");
-                line = line.toLowerCase();
-                char[] chars = line.toCharArray();
-                for (int i = 0; i < line.length(); i++) {
-                    treeSet.add(chars[i]);
-                    System.out.println(treeSet);
+        try (FileReader fileReader = new FileReader(fileName)) {
+            do {
+                nextChar = fileReader.read();
+                if (Character.isAlphabetic(nextChar)) {
+                    treeSet.add((char) Character.toLowerCase(nextChar));
                 }
-            }
+            } while (nextChar != -1);
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
         StringBuilder stringBuilder = new StringBuilder();
-        Iterator<Character> itr = treeSet.iterator();
-        while (itr.hasNext()) {
-            stringBuilder.append(itr.next());
+        int count = 0;
+        for (char c : treeSet) {
+            if (count == 5) {
+                break;
+            }
+            stringBuilder.append(c);
+            count++;
         }
-        if (stringBuilder.length() == 0) {
-            return "";
-        }
-        if (stringBuilder.length() < 5) {
-            return stringBuilder.toString();
-        }
-        return stringBuilder.delete(5, stringBuilder.length()).toString();
+        return stringBuilder.toString();
     }
 }
 
