@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -48,11 +49,11 @@ public class TreeSetCharacters {
         }
 
         StringBuilder sb = new StringBuilder();
-        for (Character c : set) {
-            sb.append(c);
+        Iterator<Character> iterator = set.iterator();
+        for (int i = 0; i < 5 && iterator.hasNext(); i++) {
+            sb.append(iterator.next());
         }
 
-        String result = sb.toString();
-        return result.length() > 5 ? result.substring(0, 5) : result;
+        return sb.toString();
     }
 }
