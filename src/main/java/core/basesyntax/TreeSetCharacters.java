@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,12 +24,7 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<Character> set = new TreeSet<>(new Comparator<Character>() {
-            @Override
-            public int compare(Character o1, Character o2) {
-                return Integer.compare(o1, o2);
-            }
-        });
+        Set<Character> set = new TreeSet<>();
 
         try (FileReader reader = new FileReader(fileName)) {
             while (reader.ready()) {
