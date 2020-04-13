@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -28,20 +27,17 @@ public class TreeSetCharacters {
         Set<Character> treeSet = new TreeSet<>();
         StringBuilder result = new StringBuilder();
 
-        try (FileReader fReader = new FileReader(fileName)) {
-            int c;
-            while ((c = fReader.read()) != -1) {
-                if (Character.isAlphabetic(c)) {
-                    treeSet.add(Character.toLowerCase((char) c));
+        try (FileReader reader = new FileReader(fileName)) {
+            while (reader.ready()) {
+                char ch = (char) reader.read();
+                if (Character.isAlphabetic(ch)) {
+                    treeSet.add(Character.toLowerCase(ch));
                 }
             }
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
-        Iterator<Character> iterator = treeSet.iterator();
-        while (iterator.hasNext() && result.length() < 5) {
-            result.append(iterator.next());
-        }
-        return result.toString();
+        treeSet.forEach(result::append);
+        return result.length() > 5 ? result.substring(0, 5) : result.toString();
     }
 }
