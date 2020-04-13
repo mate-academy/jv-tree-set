@@ -30,7 +30,7 @@ public class TreeSetCharacters {
         try (FileReader fr = new FileReader(file)) {
             int ch;
             while ((ch = fr.read()) != -1) {
-                if ((ch > 96 && ch < 123) || (ch > 64 && ch < 91)) {
+                if (Character.isLetter((char)ch)) {
                     treeSet.add(Character.toLowerCase((char) ch));
                 }
             }
