@@ -24,17 +24,12 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         if (!Files.exists(Paths.get(fileName))) {
             throw new FileNotFoundException("No file found!");
         }
 
-        List<String> stringList = null;
-        try {
-            stringList = Files.readAllLines(Paths.get(fileName));
-        } catch (IOException e) {
-            System.out.println("Wrong input!");
-        }
+        List<String> stringList = Files.readAllLines(Paths.get(fileName));
 
         StringBuilder oneString = new StringBuilder();
 
@@ -43,14 +38,20 @@ public class TreeSetCharacters {
         }
 
         TreeSet<Character> charSet = new TreeSet<>();
-        for (char ch : oneString.toString().replaceAll("[^a-z]+", "").toCharArray()) {
-            charSet.add(ch);
+        for (char ch : oneString.toString().toCharArray()) {
+            if (Character.isLetter(ch)) {
+                charSet.add(ch);
+            }
         }
 
         StringBuilder answer = new StringBuilder();
+        int counter = 0;
         for (char ch : charSet) {
-            answer.append(ch);
+            if (counter < 5) {
+                answer.append(ch);
+                counter++;
+            }
         }
-        return (answer.length() <= 5) ? answer.toString() : answer.subSequence(0,5).toString();
+        return answer.toString();
     }
 }
