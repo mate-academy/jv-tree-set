@@ -39,14 +39,9 @@ public class TreeSetCharacters {
             result.append(elem);
         }
 
-        if (result.length() < 5) {
-            return result.toString();
-        } else {
-            StringBuilder resultForLess = new StringBuilder();
-            for (int i = 0; i < 5; i++) {
-                resultForLess.append(result.charAt(i));
-            }
-            return resultForLess.toString();
+        if (result.length() >= 5) {
+            result.delete(5, result.length());
         }
+        return result.toString();
     }
 }
