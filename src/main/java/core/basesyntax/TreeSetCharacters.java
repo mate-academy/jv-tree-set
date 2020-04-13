@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -39,19 +37,18 @@ public class TreeSetCharacters {
         }
 
         StringBuilder oneString = new StringBuilder();
+
         for (String str : stringList) {
             oneString.append(str.toLowerCase());
         }
 
-        Pattern pattern = Pattern.compile("[a-z]");
-        Matcher matcher = pattern.matcher(oneString);
         TreeSet<Character> charSet = new TreeSet<>();
-        while (matcher.find()) {
-            charSet.add(oneString.charAt(matcher.start()));
+        for (char ch : oneString.toString().replaceAll("[^a-z]+", "").toCharArray()) {
+            charSet.add(ch);
         }
 
         StringBuilder answer = new StringBuilder();
-        for (Character ch : charSet) {
+        for (char ch : charSet) {
             answer.append(ch);
         }
         return (answer.length() <= 5) ? answer.toString() : answer.subSequence(0,5).toString();
