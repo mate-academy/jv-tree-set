@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -25,25 +24,30 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         TreeSet<Character> treeSet = new TreeSet<>();
-        try (FileReader ourFile = new FileReader(fileName)) {
-            int data = ourFile.read();
+        try (FileReader fileReader = new FileReader(fileName)) {
+            int data = fileReader.read();
             while (data != -1) {
                 if (Character.isAlphabetic(data)) {
                     treeSet.add((char) Character.toLowerCase(data));
                 }
-                data = ourFile.read();
+                data = fileReader.read();
             }
 
         } catch (IOException e) {
             throw new FileNotFoundException("Такого файлу не існує!");
         }
-        Iterator<Character> iterator = treeSet.iterator();
+
         StringBuilder builder = new StringBuilder();
         int i = 0;
-        while (iterator.hasNext() && i < 5) {
-            builder.append(iterator.next());
+
+        for (char c : treeSet) {
+            if (i == 5) {
+                break;
+            }
+            builder.append(c);
             i++;
         }
+
         return builder.toString();
     }
 }
