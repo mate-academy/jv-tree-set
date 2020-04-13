@@ -1,10 +1,7 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -24,20 +21,17 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         TreeSet<Character> treeSet = new TreeSet<>();
 
-        try {
-            List<String> data = Files.readAllLines(Paths.get(fileName));
-            for (String line : data) {
-                for (char c : line.toLowerCase().toCharArray()) {
-                    if (Character.isAlphabetic(c)) {
-                        treeSet.add(c);
-                    }
+        try (FileReader fileReader = new FileReader(fileName)) {
+            int data = fileReader.read();
+            while (data != -1) {
+                if (Character.isAlphabetic(data)) {
+                    treeSet.add((char) Character.toLowerCase(data));
                 }
+                data = fileReader.read();
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException();
         }
 
         StringBuilder sb = new StringBuilder();
