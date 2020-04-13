@@ -33,13 +33,11 @@ public class TreeSetCharacters {
                 symbol = fileContent.read();
             }
             StringBuilder uniqueLetters = new StringBuilder();
-            int counter = 0;
             for (char c : treeSet) {
-                if (counter == 5) {
+                if (uniqueLetters.length() == 5) {
                     break;
                 }
                 uniqueLetters.append(c);
-                counter++;
             }
             return uniqueLetters.toString();
         }
