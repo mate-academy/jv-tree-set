@@ -28,21 +28,25 @@ public class TreeSetCharacters {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));) {
             int symbol = bufferedReader.read();
             while (symbol != -1) {
-                treeSet.add(Character.toLowerCase((char) symbol));
+                if (Character.isAlphabetic(symbol)) {
+                    treeSet.add(Character.toLowerCase((char) symbol));
+                }
                 symbol = bufferedReader.read();
             }
         }
-        String result = treeSet
-                .toString()
-                .replaceAll("[\\[\\][^A-z]^]", "");
+        StringBuilder result = new StringBuilder();
+        for (Character elem : treeSet) {
+            result.append(elem);
+        }
+
         if (result.length() < 5) {
-            return result;
+            return result.toString();
         } else {
-            StringBuilder sbResult = new StringBuilder();
+            StringBuilder resultForLess = new StringBuilder();
             for (int i = 0; i < 5; i++) {
-                sbResult.append(result.charAt(i));
+                resultForLess.append(result.charAt(i));
             }
-            return sbResult.toString();
+            return resultForLess.toString();
         }
     }
 }
