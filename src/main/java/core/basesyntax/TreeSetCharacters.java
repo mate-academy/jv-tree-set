@@ -34,7 +34,7 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder sb = new StringBuilder();
-        Iterator<Character> iterator = set.iterator();
+        Iterator iterator = set.iterator();
         for (int i = 0; i < 5 && iterator.hasNext(); i++) {
             sb.append(iterator.next());
         }
