@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -40,10 +39,11 @@ public class TreeSetCharacters {
             throw new FileNotFoundException();
         }
 
+        Character[] charactersArray = new Character[set.size()];
+        set.toArray(charactersArray);
         StringBuilder stringBuilder = new StringBuilder();
-        Iterator<Character> iterator = set.iterator();
-        for (int i = 0; i <= set.size() - 1 && i < 5; i++) {
-            stringBuilder.append(iterator.next());
+        for (int i = 0; i <= charactersArray.length - 1 && i < 5; i++) {
+            stringBuilder.append(charactersArray[i]);
         }
         return stringBuilder.toString();
     }
