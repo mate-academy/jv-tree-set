@@ -40,21 +40,16 @@ public class TreeSetCharacters {
 
         StringBuilder oneString = new StringBuilder();
         for (String str : stringList) {
-            oneString.append(str);
+            oneString.append(str.toLowerCase());
         }
 
-        StringBuilder onlyLettersString = new StringBuilder();
-        Pattern pattern = Pattern.compile("[a-zA-Z]+");
+        Pattern pattern = Pattern.compile("[a-z]");
         Matcher matcher = pattern.matcher(oneString);
+        TreeSet<Character> charSet = new TreeSet<>();
         while (matcher.find()) {
-            onlyLettersString.append(oneString.subSequence(matcher.start(), matcher.end()));
+            charSet.add(oneString.charAt(matcher.start()));
         }
 
-        char[] charArray = onlyLettersString.toString().toLowerCase().toCharArray();
-        TreeSet<Character> charSet = new TreeSet<>();
-        for (char ch : charArray) {
-            charSet.add(ch);
-        }
         StringBuilder answer = new StringBuilder();
         for (Character ch : charSet) {
             answer.append(ch);
