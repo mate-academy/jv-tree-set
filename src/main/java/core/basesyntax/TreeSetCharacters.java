@@ -41,12 +41,9 @@ public class TreeSetCharacters {
         }
 
         StringBuilder sb = new StringBuilder();
-        for (Character ch : characterTreeSet) {
-            if (sb.length() == MAX_NUMBER_OF_CHARS_IN_RESULT) {
-                break;
-            }
-            sb.append(ch);
-        }
+        characterTreeSet.stream()
+                .limit(MAX_NUMBER_OF_CHARS_IN_RESULT)
+                .forEach(sb::append);
         return sb.toString();
     }
 }
