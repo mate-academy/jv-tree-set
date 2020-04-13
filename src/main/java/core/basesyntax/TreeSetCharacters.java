@@ -27,10 +27,10 @@ public class TreeSetCharacters {
         File file = new File(fileName);
         Set<Character> treeSet = new TreeSet<>(Character::compareTo);
         try (FileReader fileReader = new FileReader(file)) {
-            int i;
-            while ((i = fileReader.read()) != -1) {
-                if (Character.isLetter((char)i)) {
-                    treeSet.add(Character.toLowerCase((char) i));
+            int readValue;
+            while ((readValue = fileReader.read()) != -1) {
+                if (Character.isLetter((char)readValue)) {
+                    treeSet.add(Character.toLowerCase((char) readValue));
                 }
             }
         }
