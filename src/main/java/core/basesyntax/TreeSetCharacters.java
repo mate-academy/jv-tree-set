@@ -37,7 +37,7 @@ public class TreeSetCharacters {
         StringBuilder result = new StringBuilder();
         for (Character elem : treeSet) {
             result.append(elem);
-            if (result.length() > 4){
+            if (result.length() >= 5) {
                 break;
             }
         }
