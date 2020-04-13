@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Comparator;
@@ -33,12 +32,11 @@ public class TreeSetCharacters {
             }
         });
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        try (FileReader reader = new FileReader(fileName)) {
             while (reader.ready()) {
-                String charAsString = ((char) reader.read() + "")
-                        .replaceAll("[_\\W\\d]", "").toLowerCase();
-                if (!charAsString.equals("")) {
-                    set.add(charAsString.toCharArray()[0]);
+                Character c = (char) reader.read();
+                if (Character.isAlphabetic(c)) {
+                    set.add(Character.toLowerCase(c));
                 }
             }
         }
@@ -48,7 +46,6 @@ public class TreeSetCharacters {
         for (int i = 0; i < 5 && iterator.hasNext(); i++) {
             sb.append(iterator.next());
         }
-
         return sb.toString();
     }
 }
