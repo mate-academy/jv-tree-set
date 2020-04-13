@@ -29,7 +29,7 @@ public class TreeSetCharacters {
             int value;
             while ((value = reader.read()) != -1) {
                 if (Character.isAlphabetic((char) value)) {
-                    setOfChars.add(Character.toLowerCase(Character.toLowerCase((char) value)));
+                    setOfChars.add(Character.toLowerCase((char) value));
                 }
             }
         }
