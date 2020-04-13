@@ -27,7 +27,7 @@ public class TreeSetCharacters {
         Set<Character> set = new TreeSet<>();
         try (FileReader reader = new FileReader(fileName)) {
             while (reader.ready()) {
-                Character c = (char) reader.read();
+                char c = (char) reader.read();
                 if (Character.isAlphabetic(c)) {
                     set.add(Character.toLowerCase(c));
                 }
