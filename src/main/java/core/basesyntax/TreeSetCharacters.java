@@ -26,12 +26,11 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         TreeSet<Character> set = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
-            int numberOfSymbol = fileReader.read();
-            while (numberOfSymbol != -1) {
+            int numberOfSymbol;
+            while ((numberOfSymbol = fileReader.read()) != -1) {
                 if (Character.isLetter((char) numberOfSymbol)) {
                     set.add((char) Character.toLowerCase(numberOfSymbol));
                 }
-                numberOfSymbol = fileReader.read();
             }
         } catch (IOException e) {
             throw new FileNotFoundException(fileName + "is not found");
