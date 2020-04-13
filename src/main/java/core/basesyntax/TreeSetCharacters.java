@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -33,15 +32,11 @@ public class TreeSetCharacters {
                 }
                 data = fileReader.read();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         }
         StringBuilder result = new StringBuilder();
-        int n = 0;
         for (char c : uniqueChars) {
             result.append(c);
-            if (++n == 5) {
+            if (result.length() == 5) {
                 break;
             }
         }
