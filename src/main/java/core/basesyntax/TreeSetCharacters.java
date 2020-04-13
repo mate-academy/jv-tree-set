@@ -42,10 +42,6 @@ public class TreeSetCharacters {
                     set.add(charAsString.toCharArray()[0]);
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("Error: File not found.");
-        } catch (IOException e) {
-            throw new IOException(e);
         }
 
         StringBuilder sb = new StringBuilder();
