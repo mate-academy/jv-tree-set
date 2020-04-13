@@ -25,7 +25,6 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> set = new TreeSet<>();
-
         try (FileReader reader = new FileReader(fileName)) {
             while (reader.ready()) {
                 Character c = (char) reader.read();
@@ -34,7 +33,6 @@ public class TreeSetCharacters {
                 }
             }
         }
-
         StringBuilder sb = new StringBuilder();
         Iterator<Character> iterator = set.iterator();
         for (int i = 0; i < 5 && iterator.hasNext(); i++) {
