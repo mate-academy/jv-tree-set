@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,9 +25,7 @@ public class TreeSetCharacters {
     private static final int MAX_OUTPUT_LENGTH = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        File file = new File(fileName);
         TreeSet<Character> treeSet = new TreeSet<>();
-
         try (FileReader fileReader = new FileReader(fileName)) {
             Character character;
             for (int i = fileReader.read(); i != -1; i = fileReader.read()) {
