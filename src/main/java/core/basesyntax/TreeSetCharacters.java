@@ -31,7 +31,7 @@ public class TreeSetCharacters {
         StringBuilder sb = new StringBuilder(Files.readString(Paths.get(fileName)).toLowerCase());
         Set<Character> charSet = new TreeSet<>();
         for (int i = 0; i < sb.length(); i++) {
-            if (Character.isAlphabetic(sb.charAt(i))){
+            if (Character.isAlphabetic(sb.charAt(i))) {
                 charSet.add(sb.charAt(i));
             }
         }
