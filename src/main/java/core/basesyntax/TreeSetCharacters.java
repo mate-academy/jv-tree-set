@@ -23,7 +23,6 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        String line = "";
         int nextChar = 0;
         TreeSet<Character> treeSet = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
