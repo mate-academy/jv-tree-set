@@ -17,7 +17,12 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(treeSet.toString().replaceAll(" |,|\\]|\\[",""));
-        return treeSet.size() < 5 ? sb.toString() : sb.toString().substring(0, 5);
+        for (Character s : treeSet) {
+            if (sb.length() == 5) {
+                break;
+            }
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }
