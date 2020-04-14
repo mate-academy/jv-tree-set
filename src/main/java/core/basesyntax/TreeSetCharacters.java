@@ -23,25 +23,22 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         TreeSet<Character> treeSet = new TreeSet<>();
-        FileReader fileReader = new FileReader(fileName);
+        try (FileReader fileReader = new FileReader(fileName)) {
 
-        int data = fileReader.read();
-
-        while (data != -1) {
-            if (Character.isAlphabetic(data)) {
-                treeSet.add((char) Character.toLowerCase(data));
+            while (fileReader.ready()) {
+                char file = (char)fileReader.read();
+                if (Character.isLetter(file)) {
+                    treeSet.add(Character.toLowerCase(file));
+                }
             }
-            data = fileReader.read();
         }
 
         StringBuilder sb = new StringBuilder();
-        int i = 0;
         for (Character c : treeSet) {
-            if (i == 5) {
+            if (sb.length() == 5) {
                 break;
             }
             sb.append(c);
-            i++;
         }
         return sb.toString();
     }
