@@ -25,12 +25,11 @@ public class TreeSetCharacters {
         TreeSet<Character> chars = new TreeSet();
 
         try (FileReader readIt = new FileReader(fileName)) {
-            int data = readIt.read();
-            while (data != -1) {
-                if (Character.isAlphabetic(data)) {
-                    chars.add((char) Character.toLowerCase(data));
+            while (readIt.ready()) {
+                char ch = (char) readIt.read();
+                if (Character.isAlphabetic(ch)) {
+                    chars.add(Character.toLowerCase(ch));
                 }
-                data = readIt.read();
             }
         }
 
