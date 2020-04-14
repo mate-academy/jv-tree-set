@@ -23,19 +23,19 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         TreeSet<Character> treeSet = new TreeSet<>();
-        try (FileReader file = new FileReader(fileName)) {
-            int symbol = file.read();
-            while (symbol != -1) {
+        try (FileReader reader = new FileReader(fileName)) {
+            int symbol = reader.read();
+            while (reader.ready()) {
                 if (Character.isLetter(symbol)) {
                     treeSet.add((char) Character.toLowerCase(symbol));
                 }
-                symbol = file.read();
+                symbol = reader.read();
             }
         } catch (Exception e) {
             throw new FileNotFoundException("File not found" + e);
         }
         StringBuilder result = new StringBuilder();
-        for (Character character :treeSet) {
+        for (Character character : treeSet) {
             result.append(character);
             if (result.length() == 5) {
                 break;
