@@ -34,13 +34,11 @@ public class TreeSetCharacters {
         }
 
         StringBuilder sb = new StringBuilder();
-        int i = 0;
         for (Character c : chars) {
-            if (i == 5) {
+            sb.append(c);
+            if (sb.length() == 5) {
                 break;
             }
-            sb.append(c);
-            i++;
         }
         return sb.toString();
     }
