@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.TreeSet;
 
 /**
@@ -26,45 +26,21 @@ public class TreeSetCharacters {
         TreeSet<Character> characterTreeSet = new TreeSet<>();
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-
-            String text = bufferedReader.readLine();
-            String s = text.replaceAll("[^a-zA-z]", "").toLowerCase();
-            char[] chars = s.toCharArray();
-            for (char aChar : chars) {
-                characterTreeSet.add(aChar);
+            char character;
+            while (bufferedReader.ready()) {
+                character = (char) bufferedReader.read();
+                if (Character.isLetter(character)) {
+                    characterTreeSet.add(Character.toLowerCase(character));
+                }
             }
-
             for (Character c : characterTreeSet) {
                 stringBuilder.append(c);
-                if(stringBuilder.length()==5){
-                    return stringBuilder.toString();
+                if (stringBuilder.length() == 5) {
+                    break;
                 }
             }
         }
-
-
         return stringBuilder.toString();
-//        TreeSet<Character> characterTreeSet = new TreeSet<>();
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//        String text = Files.readString(Paths.get(fileName)).replaceAll("[^a-zA-z]", "").toLowerCase();
-//        char[] chars = text.toCharArray();
-//        for (char aChar : chars) {
-//            characterTreeSet.add(aChar);
-//        }
-//
-//
-//        int count = 0;
-//        for (Character c : characterTreeSet) {
-//            stringBuilder.append(c);
-//            count++;
-//            if (count == 5) {
-//                break;
-//            }
-//        }
-//
-//        return stringBuilder.toString();
-
     }
 }
 
