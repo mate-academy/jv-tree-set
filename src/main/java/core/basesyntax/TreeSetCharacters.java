@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -26,22 +25,30 @@ public class TreeSetCharacters {
     public static final int LENGTH_FIFTH = 5;
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        String result;
-        Set<String> uniqueCharacters = new TreeSet<>();
+        StringBuilder result = new StringBuilder();
+        TreeSet<Character> uniqueCharacters = new TreeSet<>();
+        int count = 0;
+        int size = 0;
         try (FileReader fileReader = new FileReader(fileName)) {
             while (fileReader.ready()) {
                 char ch = (char) fileReader.read();
                 if (Character.isLetter(ch)) {
-                    uniqueCharacters.add(String.valueOf(ch).toLowerCase());
+                    uniqueCharacters.add(Character.toLowerCase(ch));
                 }
             }
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
-        result = String.join("", uniqueCharacters);
-        return result.length() > LENGTH_FIFTH
-                ? result.substring(0, LENGTH_FIFTH)
-                : result;
+
+        for (char c : uniqueCharacters) {
+            if (count == 5) {
+                break;
+            }
+            result.append(c);
+            count++;
+        }
+
+        return result.toString();
     }
 }
 
