@@ -26,10 +26,10 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         TreeSet<Character> uniqueChars = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
-            int characterCode;
-            while ((characterCode = fileReader.read()) != -1) {
-                if (Character.isLetter(characterCode)) {
-                    uniqueChars.add(Character.toLowerCase((char) characterCode));
+            while (fileReader.ready()) {
+                char character = (char) fileReader.read();
+                if (Character.isLetter(character)) {
+                    uniqueChars.add(Character.toLowerCase(character));
                 }
             }
         }
