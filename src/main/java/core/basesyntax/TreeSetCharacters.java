@@ -26,21 +26,19 @@ public class TreeSetCharacters {
     public static final int LENGTH_FIFTH = 5;
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        String result = new String();
-        Set<Character> uniqueCharacters = new TreeSet<>();
-        try (FileReader file = new FileReader(fileName)) {
-            int digit = file.read();
-            while (digit != -1) {
-                if (Character.isLetter(digit)) {
-                    uniqueCharacters.add((char) Character.toLowerCase(digit));
+        String result;
+        Set<String> uniqueCharacters = new TreeSet<>();
+        try (FileReader fileReader = new FileReader(fileName)) {
+            while (fileReader.ready()) {
+                char ch = (char) fileReader.read();
+                if (Character.isLetter(ch)) {
+                    uniqueCharacters.add(String.valueOf(ch).toLowerCase());
                 }
-                digit = file.read();
             }
-            result = uniqueCharacters.toString().replaceAll("[^a-z]", "");
-
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
+        result = String.join("", uniqueCharacters);
         return result.length() > LENGTH_FIFTH
                 ? result.substring(0, LENGTH_FIFTH)
                 : result;
