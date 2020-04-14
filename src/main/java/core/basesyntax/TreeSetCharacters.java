@@ -38,12 +38,13 @@ public class TreeSetCharacters {
             throw new FileNotFoundException(fileName + " is not found!");
         }
 
-        Iterator<Character> iterator = treeSet.iterator();
         StringBuilder stringBuilder = new StringBuilder();
-        int temp = 0;
-        while (iterator.hasNext() && temp < 5) {
-            stringBuilder.append(iterator.next());
-            temp++;
+        for (char c : treeSet) {
+            if (stringBuilder.length() == 5) {
+                break;
+            }
+            stringBuilder.append(c);
+
         }
         return stringBuilder.toString();
     }
