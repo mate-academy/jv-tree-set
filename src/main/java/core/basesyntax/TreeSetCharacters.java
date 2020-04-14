@@ -1,23 +1,31 @@
 package core.basesyntax;
 
-/**
- * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
- * Для цього використовуйте TreeSet. Файл містить букви латинського алфавіту і розділові знаки.</p>
- *
- * <p>Метод повинен відсортувати всі букви по алфавіту і повернути строку з 5 різних букв без
- * розділових знаків.
- * Якщо у файлі міститься менше п'яти різних букв, то потрібно повернути їх усі.
- * Можливий випадок, коли переданого файлу не існує, в такому разі потрібно викинути помилку
- * про відсутність файлу.</p>
- *
- * <p>Приклад 1: ur-BvT?^ ra w; p
- * Результат 1: abprt</p>
- *
- * <p>Приклад 2: A _f*c a?F
- * Результат 2: acf</p>
- */
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.TreeSet;
+
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) {
-        return null;
+    public String getUniqueCharacters(String fileName) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder chapter = new StringBuilder();
+        TreeSet<Character> treeSet = new TreeSet<>();
+        FileReader reader = new FileReader(fileName);
+        while (reader.ready()) {
+            stringBuilder.append((char) reader.read());
+        }
+        reader.close();
+        char[] chars = stringBuilder.toString().toCharArray();
+        for (Character i : chars) {
+            if (Character.isLetter(i)) {
+                treeSet.add(Character.toLowerCase(i));
+            }
+        }
+        for (Character j : treeSet) {
+            if (chapter.length() == 5) {
+                break;
+            }
+            chapter.append(j);
+        }
+        return chapter.toString();
     }
 }
