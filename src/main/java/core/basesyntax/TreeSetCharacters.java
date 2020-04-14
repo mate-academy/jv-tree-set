@@ -38,11 +38,11 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder fileNameToReturn = new StringBuilder("");
-        Iterator iterator = fileNameChars.iterator();
-        int i = 0;
-        while (i != 5 && iterator.hasNext()) {
-            fileNameToReturn.append(iterator.next());
-            i++;
+        for (Character ch: fileNameChars) {
+            fileNameToReturn.append(ch);
+            if (fileNameToReturn.length() == 5) {
+                break;
+            }
         }
         return fileNameToReturn.toString();
     }
