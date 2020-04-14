@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -34,9 +33,8 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder sb = new StringBuilder();
-        Iterator<Character> iterator = treeSet.iterator();
-        while (iterator.hasNext()) {
-            sb.append(iterator.next());
+        for (Character ch: treeSet) {
+            sb.append(ch);
             if (sb.length() > 4) {
                 break;
             }
