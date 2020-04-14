@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,22 +25,20 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> set = new TreeSet<>();
         try (FileReader parser = new FileReader(fileName)) {
-            int data = parser.read();
-            while (data > 0) {
-                if (Character.isLetter(data)) {
-                    set.add((char) Character.toLowerCase(data));
+            while (parser.ready()) {
+                char c = (char) parser.read();
+                if (Character.isLetter(c)) {
+                    set.add(Character.toLowerCase(c));
                 }
-                data = parser.read();
             }
         }
-        Iterator<Character> iterator = set.iterator();
         StringBuilder stringBuilder = new StringBuilder();
         int i = 0;
-        while (iterator.hasNext()) {
+        for (char ch : set) {
             if (i == 5) {
                 break;
             }
-            stringBuilder.append(iterator.next());
+            stringBuilder.append(ch);
             i++;
         }
         return stringBuilder.toString();
