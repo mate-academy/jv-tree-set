@@ -20,9 +20,8 @@ public class TreeSetCharacters {
                 treeSet.add(Character.toLowerCase(i));
             }
         }
-        int x = 5;
         for (Character j : treeSet) {
-            if (x-- == 0) {
+            if (chapter.length() == 5) {
                 break;
             }
             chapter.append(j);
