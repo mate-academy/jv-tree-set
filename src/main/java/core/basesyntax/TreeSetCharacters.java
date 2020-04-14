@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 public class TreeSetCharacters {
@@ -21,11 +20,12 @@ public class TreeSetCharacters {
                 treeSet.add(Character.toLowerCase(i));
             }
         }
-        Iterator<Character> iterator = treeSet.iterator();
         int x = 5;
-        while (iterator.hasNext() && x > 0) {
-            chapter.append(iterator.next());
-            x--;
+        for (Character j : treeSet) {
+            if (x-- == 0) {
+                break;
+            }
+            chapter.append(j);
         }
         return chapter.toString();
     }
