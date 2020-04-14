@@ -44,7 +44,7 @@ public class TreeSetCharacters {
                 break;
             }
         }
-        return result.toString().substring(0, Math.min(result.toString().length(), 5));
+        return result.toString();
     }
 }
 
