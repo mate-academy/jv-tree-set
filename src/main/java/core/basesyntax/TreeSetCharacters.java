@@ -38,11 +38,9 @@ public class TreeSetCharacters {
             throw new FileNotFoundException("Incorect path");
         }
         StringBuilder result = new StringBuilder();
-        int index = 0;
         for (char b : sortedChars) {
             result.append(b);
-            index++;
-            if (index == 5) {
+            if (result.length() == 5) {
                 break;
             }
         }
