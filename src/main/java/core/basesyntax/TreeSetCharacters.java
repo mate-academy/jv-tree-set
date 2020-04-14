@@ -36,11 +36,9 @@ public class TreeSetCharacters {
             }
         }
         sb.setLength(0);
-        int count = 0;
         for (Character c : charSet) {
             sb.append(c);
-            count++;
-            if (count == 5) {
+            if (sb.length() == 5) {
                 break;
             }
         }
