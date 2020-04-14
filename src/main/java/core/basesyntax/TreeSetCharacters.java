@@ -13,7 +13,6 @@ public class TreeSetCharacters {
                 if (Character.isLetter(a)) {
                     treeSet.add(Character.toLowerCase(a));
                 }
-                fileReader.ready();
             }
         }
         StringBuilder sb = new StringBuilder();
