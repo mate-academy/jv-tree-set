@@ -26,27 +26,26 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         StringBuilder stringBuilder = new StringBuilder();
         TreeSet treeSet = new TreeSet();
-        String result = "";
 
         try (FileReader fileReader = new FileReader(fileName)) {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int symbol = bufferedReader.read();
             while (symbol != -1) {
-                treeSet.add((char) Character.toLowerCase(symbol));
+                if (Character.isLetter(symbol)) {
+                    treeSet.add((char) Character.toLowerCase(symbol));
+                }
                 symbol = bufferedReader.read();
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("There is no file!");
+            throw new FileNotFoundException("There is no file in our universe!");
         }
 
         for (Object o : treeSet) {
             stringBuilder.append(o);
+            if (stringBuilder.length() == 5) {
+                break;
+            }
         }
-        result = stringBuilder.toString()
-                .replaceAll("[\\W]", "")
-                .replaceAll("[\\d_]", "");
-
-        return result.length() > 5 ? result.substring(0, 5) : result;
-
+        return stringBuilder.toString();
     }
 }
