@@ -27,28 +27,28 @@ public class TreeSetCharacters {
     private static final int LENGTH_OF_RESULT_STRING = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder dirtyString = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         try (FileReader fileReader = new FileReader(fileName)) {
             Scanner scanner = new Scanner(fileReader);
             while (scanner.hasNextLine()) {
-                dirtyString.append(scanner.nextLine());
+                stringBuilder.append(scanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File is not exist");
         }
-        char[] clearString = dirtyString.toString()
+        char[] clearString = stringBuilder.toString()
                 .replaceAll("[^a-zA-Z]", "").toLowerCase().toCharArray();
         Set<Character> treeSet = new TreeSet<>();
         for (char c : clearString) {
             treeSet.add(c);
         }
-        String result = "";
+        stringBuilder.setLength(0);
         for (char c : treeSet) {
-            while (result.length() != LENGTH_OF_RESULT_STRING) {
-                result += c;
+            while (stringBuilder.length() != LENGTH_OF_RESULT_STRING) {
+                stringBuilder.append(c);
                 break;
             }
         }
-        return result;
+        return stringBuilder.toString();
     }
 }
