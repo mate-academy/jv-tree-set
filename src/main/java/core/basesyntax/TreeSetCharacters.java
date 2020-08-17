@@ -23,6 +23,9 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+
+    private static final int MAX_LENGTH = 5;
+
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         Set<Character> charsFromFile = new TreeSet<>();
@@ -37,7 +40,7 @@ public class TreeSetCharacters {
             throw new FileNotFoundException("File not Found!");
         }
         for (Character character : charsFromFile) {
-            if (result.length() < 5) {
+            if (result.length() < MAX_LENGTH) {
                 result.append(character);
             }
         }
