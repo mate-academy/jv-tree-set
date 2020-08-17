@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -28,34 +27,27 @@ public class TreeSetCharacters {
 
     public String getUniqueCharacters(String fileName) throws IOException {
         String line;
-        StringBuilder concat = new StringBuilder();
+        StringBuilder concatenateInput = new StringBuilder();
         Set<Character> set = new TreeSet<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             while ((line = reader.readLine()) != null) {
-                concat.append(line.toLowerCase());
-            }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException();
-        } catch (IOException e) {
-            throw new IOException();
-        }
-
-        for (int i = 0; i < concat.length(); i++) {
-            if (Character.isLetter(concat.toString().charAt(i))) {
-                set.add(concat.toString().charAt(i));
+                for (int i = 0; i < line.length(); i++) {
+                    if (Character.isLetter(line.charAt(i))) {
+                        set.add(line.toLowerCase().charAt(i));
+                    }
+                }
             }
         }
         if (set.isEmpty()) {
             return "";
         }
-        concat.delete(0, concat.length());
         for (Character character : set) {
-            concat.append(character);
-            if (concat.length() == MAX_COUNT_OF_LETTERS) {
+            concatenateInput.append(character);
+            if (concatenateInput.length() == MAX_COUNT_OF_LETTERS) {
                 break;
             }
         }
-        return concat.toString();
+        return concatenateInput.toString();
     }
 }
