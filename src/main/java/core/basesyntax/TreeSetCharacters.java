@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.TreeSet;
@@ -31,10 +30,6 @@ public class TreeSetCharacters {
             while ((inputLine = bufferedReader.readLine()) != null) {
                 stringBuilder.append(inputLine.toLowerCase().replaceAll("[^a-z]", ""));
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Can't read from file");
         }
 
         TreeSet<Character> stringSet = new TreeSet<>();
