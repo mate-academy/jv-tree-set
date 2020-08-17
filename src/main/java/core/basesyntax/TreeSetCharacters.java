@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -31,6 +32,8 @@ public class TreeSetCharacters {
                     characters.add(Character.toLowerCase(character));
                 }
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File not found " + e);
         }
         StringBuilder result = new StringBuilder();
         for (Character element : characters) {
