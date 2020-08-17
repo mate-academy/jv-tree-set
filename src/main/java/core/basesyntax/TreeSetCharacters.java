@@ -37,10 +37,9 @@ public class TreeSetCharacters {
 
         SortedSet<Character> sortedCharSet
                 = readedInfo
-                .toString()
-                .toLowerCase()
-                .replaceAll("[^a-z]", "")
                 .chars()
+                .filter(Character::isLetter)
+                .map(Character::toLowerCase)
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.toCollection(TreeSet::new));
 
