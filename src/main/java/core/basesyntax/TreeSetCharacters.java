@@ -23,7 +23,7 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
 
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
@@ -34,7 +34,7 @@ public class TreeSetCharacters {
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found");
         } catch (IOException e) {
-            System.out.println("Can't read from file");
+            throw new IOException("Can't read from file");
         }
 
         TreeSet<Character> stringSet = new TreeSet<>();
