@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -25,13 +24,15 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<Character> set = new TreeSet<Character>();
+        Set<Character> set = new TreeSet<>();
         try (FileReader fr = new FileReader(fileName)) {
             Scanner scan = new Scanner(fr);
             while (scan.hasNextLine()) {
-                String string = scan.nextLine().replaceAll("[^a-zA-Z]", "").toLowerCase();
+                String string = scan.nextLine();
                 for (char c : string.toCharArray()) {
-                    set.add(c);
+                    if (Character.isAlphabetic(c)) {
+                        set.add(Character.toLowerCase(c));
+                    }
                 }
             }
             StringBuilder result = new StringBuilder();
@@ -40,8 +41,6 @@ public class TreeSetCharacters {
             }
             return result.toString().length() > 4
                     ? result.toString().substring(0, 5) : result.toString();
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File [" + fileName + "] has not been found\n");
         }
     }
 }
