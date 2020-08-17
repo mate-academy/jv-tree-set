@@ -1,6 +1,10 @@
 package core.basesyntax;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,16 +25,22 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) {
-        String newFileName = fileName.replaceAll("^[a-zA-Z]", "");
-        newFileName = newFileName.toLowerCase();
-        Set<Character> sortedTreeSet = new TreeSet<>();
-        for (int i = 0; i < newFileName.length(); i++) {
-            sortedTreeSet.add(newFileName.charAt(i));
+    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+        StringBuilder text = new StringBuilder();
+        try (Scanner scanner = new Scanner(new FileReader(fileName))) {
+            while (scanner.hasNextLine()) {
+                text.append(scanner.nextLine().toLowerCase().replaceAll("[^a-z]", ""));
+            }
+        } catch (IOException e) {
+            throw new FileNotFoundException("Mentioned file does not exists");
+        }
+        Set<Character> treeSet = new TreeSet<>();
+        for (int i = 0; i < text.length(); i++) {
+            treeSet.add(text.charAt(i));
         }
         StringBuilder result = new StringBuilder();
         int size = 0;
-        Iterator<Character> iterator = sortedTreeSet.iterator();
+        Iterator<Character> iterator = treeSet.iterator();
         while (iterator.hasNext() && size < 5) {
             result.append(iterator.next());
             size++;
