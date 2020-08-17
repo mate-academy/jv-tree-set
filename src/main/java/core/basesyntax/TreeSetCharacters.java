@@ -36,7 +36,7 @@ public class TreeSetCharacters {
                     setOfChar.add((char) Character.toLowerCase(symbol));
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new FileNotFoundException("File not found");
         }
         StringBuilder result = new StringBuilder();
