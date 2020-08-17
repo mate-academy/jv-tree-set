@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -36,13 +37,11 @@ public class TreeSetCharacters {
 
         letterSet.removeIf(symbol -> !Character.isLetter(symbol));
         StringBuilder resultStr = new StringBuilder();
+        Iterator<Character> iterator = letterSet.iterator();
         int count = 0;
-        for (Character letter : letterSet) {
+        while (iterator.hasNext() && count != 5) {
             count++;
-            resultStr.append(letter);
-            if (count == MAX_LETTERS) {
-                return resultStr.toString();
-            }
+            resultStr.append(iterator.next());
         }
         return resultStr.toString();
     }
