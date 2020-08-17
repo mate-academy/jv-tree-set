@@ -24,6 +24,8 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int MAX_COUNT_OF_LETTERS = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         String line;
         StringBuilder concat = new StringBuilder();
@@ -44,13 +46,13 @@ public class TreeSetCharacters {
                 set.add(concat.toString().charAt(i));
             }
         }
-        if (set.size() == 0) {
+        if (set.isEmpty()) {
             return "";
         }
         concat.delete(0, concat.length());
         for (Character character : set) {
             concat.append(character);
-            if (concat.length() == 5) {
+            if (concat.length() == MAX_COUNT_OF_LETTERS) {
                 break;
             }
         }
