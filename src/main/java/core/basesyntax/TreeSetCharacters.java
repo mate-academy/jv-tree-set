@@ -37,8 +37,6 @@ public class TreeSetCharacters {
                     latterSet.add(symbol);
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found");
         }
 
         int count = 0;
