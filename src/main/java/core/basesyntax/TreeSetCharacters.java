@@ -24,6 +24,8 @@ import java.util.stream.Collector;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int LETTERS_LIMIT = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> characters;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -35,7 +37,7 @@ public class TreeSetCharacters {
                     .collect(TreeSet::new, TreeSet::add, TreeSet::addAll);
         }
         return characters.stream()
-                .limit(5)
+                .limit(LETTERS_LIMIT)
                 .collect(Collector.of(StringBuilder::new,
                         StringBuilder::append,
                         StringBuilder::append,
