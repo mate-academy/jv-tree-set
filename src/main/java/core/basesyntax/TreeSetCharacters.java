@@ -32,7 +32,7 @@ public class TreeSetCharacters {
                 text.append(scanner.nextLine().toLowerCase().replaceAll("[^a-z]", ""));
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("Mentioned file does not exists");
+            throw new FileNotFoundException("Mentioned file does not exist");
         }
         Set<Character> treeSet = new TreeSet<>();
         for (int i = 0; i < text.length(); i++) {
