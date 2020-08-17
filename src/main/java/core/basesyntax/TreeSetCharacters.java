@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -24,7 +25,7 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        TreeSet<Character> treeSet = new TreeSet<>();
+        Set<Character> treeSet = new TreeSet<>();
         try (Reader reader = new FileReader(fileName)) {
             int character = reader.read();
             while (character != -1) {
