@@ -37,11 +37,10 @@ public class TreeSetCharacters {
         }
         StringBuilder string = new StringBuilder();
         for (String value : treeSet) {
-            if (string.length() < RESULT_LENGTH) {
-                string.append(value);
-            } else {
+            if (string.length() == RESULT_LENGTH) {
                 break;
             }
+            string.append(value);
         }
         return string.toString();
     }
