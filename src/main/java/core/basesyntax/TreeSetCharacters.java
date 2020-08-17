@@ -36,12 +36,10 @@ public class TreeSetCharacters {
                 symbol = (char)fileReader.read();
             }
         }
-        int counter = 0;
         StringBuilder answer = new StringBuilder();
         for (Character element : sortAnswer) {
             answer.append(element);
-            counter++;
-            if (counter == MAX_ANSWER_ELEMENTS) {
+            if (answer.length() == MAX_ANSWER_ELEMENTS) {
                 break;
             }
         }
