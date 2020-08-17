@@ -30,27 +30,25 @@ public class TreeSetCharacters {
         Path filePath = Paths.get(fileName);
         Set<String> treeSet = new TreeSet<>();
         StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = Files.newBufferedReader(filePath)) {
-            String buffer;
-            while ((buffer = reader.readLine()) != null) {
-                for (int i = 0; i < buffer.length(); i++) {
-                    char current = buffer.charAt(i);
-                    if (Character.isAlphabetic(buffer.charAt(i))) {
-                        treeSet.add(Character.toLowerCase(current) + "");
-                    }
+        if (!Files.exists(filePath)) {
+            throw new FileNotFoundException("No such file");
+        }
+        BufferedReader reader = Files.newBufferedReader(filePath);
+        String buffer;
+        while ((buffer = reader.readLine()) != null) {
+            for (int i = 0; i < buffer.length(); i++) {
+                char current = buffer.charAt(i);
+                if (Character.isAlphabetic(buffer.charAt(i))) {
+                    treeSet.add(Character.toLowerCase(current) + "");
                 }
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException(e.getMessage());
         }
-
         for (String s : treeSet) {
             stringBuilder.append(s);
             if (stringBuilder.length() >= 5) {
                 break;
             }
         }
-
         return stringBuilder.toString();
     }
 }
