@@ -33,9 +33,11 @@ public class TreeSetCharacters {
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             String buffer;
             while ((buffer = reader.readLine()) != null) {
-                buffer = buffer.toLowerCase().replaceAll("[^a-z]", "");
                 for (int i = 0; i < buffer.length(); i++) {
-                    treeSet.add(buffer.charAt(i) + "");
+                    char current = buffer.charAt(i);
+                    if (Character.isAlphabetic(buffer.charAt(i))) {
+                        treeSet.add(Character.toLowerCase(current) + "");
+                    }
                 }
             }
         } catch (IOException e) {
