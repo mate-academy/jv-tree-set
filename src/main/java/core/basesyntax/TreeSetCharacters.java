@@ -35,7 +35,7 @@ public class TreeSetCharacters {
         } catch (IOException e) {
             throw new FileNotFoundException("This file has not found");
         }
-        TreeSet<String> treeSet = Stream.of(fileText.split(""))
+        Set<String> treeSet = Stream.of(fileText.split(""))
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
         return treeSet.size() >= 5 ? String.join("", treeSet).substring(0, 5)
