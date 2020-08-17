@@ -23,13 +23,13 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     private static final int MAX_ANSWER_ELEMENTS = 5;
-    private static final int END_OF_LINE_CODE = 65535;
+    private static final int END_OF_FILE_CODE = 65535;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> sortAnswer = new TreeSet<>();
         try (FileReader fileReader = new FileReader(fileName)) {
             char symbol = (char)fileReader.read();
-            while (symbol != END_OF_LINE_CODE) {
+            while (symbol != END_OF_FILE_CODE) {
                 if (Character.isLetter(symbol)) {
                     sortAnswer.add(Character.toLowerCase(symbol));
                 }
