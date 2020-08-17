@@ -42,6 +42,8 @@ public class TreeSetCharacters {
                 count++;
             }
             return resultString.toString();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(e.getMessage());
         }
     }
 }
