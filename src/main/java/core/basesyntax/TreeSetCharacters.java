@@ -1,10 +1,8 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -27,28 +25,21 @@ public class TreeSetCharacters {
     private static final int LENGTH_OF_RESULT_STRING = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (FileReader fileReader = new FileReader(fileName)) {
-            Scanner scanner = new Scanner(fileReader);
-            while (scanner.hasNextLine()) {
-                stringBuilder.append(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File is not exist");
-        }
-        char[] clearString = stringBuilder.toString()
-                .replaceAll("[^a-zA-Z]", "").toLowerCase().toCharArray();
-        Set<Character> treeSet = new TreeSet<>();
-        for (char c : clearString) {
-            treeSet.add(c);
-        }
-        stringBuilder.setLength(0);
-        for (char c : treeSet) {
-            while (stringBuilder.length() != LENGTH_OF_RESULT_STRING) {
-                stringBuilder.append(c);
-                break;
+        TreeSet<Character> treeSet = new TreeSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int index = reader.read();
+            while (index != -1) {
+                if (Character.isLetter(index)) {
+                    treeSet.add((char) Character.toLowerCase(index));
+                }
+                index = reader.read();
             }
         }
-        return stringBuilder.toString();
+        StringBuilder result = new StringBuilder();
+        int sizeOfResult = Math.min(treeSet.size(), LENGTH_OF_RESULT_STRING);
+        for (int i = 0; i < sizeOfResult; i++) {
+            result.append(treeSet.pollFirst());
+        }
+        return result.toString();
     }
 }
