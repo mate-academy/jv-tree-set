@@ -37,9 +37,9 @@ public class TreeSetCharacters {
         letterSet.removeIf(symbol -> !Character.isLetter(symbol));
         StringBuilder resultStr = new StringBuilder();
         int count = 0;
-        for (Character s : letterSet) {
+        for (Character letter : letterSet) {
             count++;
-            resultStr.append(s);
+            resultStr.append(letter);
             if (count == MAX_LETTERS) {
                 return resultStr.toString();
             }
