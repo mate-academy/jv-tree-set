@@ -2,14 +2,10 @@ package core.basesyntax;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -43,7 +39,6 @@ public class TreeSetCharacters {
         }
         StringBuilder result = new StringBuilder();
         for (Character character : setOfChars) {
-
             result.append(character);
             if (result.length() == 5) {
                 break;
