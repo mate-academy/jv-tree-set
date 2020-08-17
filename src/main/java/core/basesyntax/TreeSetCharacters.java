@@ -44,6 +44,6 @@ public class TreeSetCharacters {
             result.append(iterator.next());
             size++;
         }
-        return new String(result);
+        return result.toString();
     }
 }
