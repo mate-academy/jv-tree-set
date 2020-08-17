@@ -1,12 +1,10 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.TreeSet;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -25,15 +23,16 @@ import java.util.stream.Collectors;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        Set<String> collect;
+    public String getUniqueCharacters(String fileName) throws IOException {
+        Set<String> collect = new TreeSet<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            collect = bufferedReader.lines()
-                    .flatMap(x -> Arrays.stream(x.toLowerCase()
-                            .replaceAll("[\\W\\d]", "")
-                            .split(""))).collect(Collectors.toSet());
-        } catch (IOException e) {
-            throw new FileNotFoundException("File not found!!!");
+            int read = bufferedReader.read();
+            while (read > 0) {
+                if (Character.isLetter(read)) {
+                    collect.add(Character.toString(read).toLowerCase());
+                }
+                read = bufferedReader.read();
+            }
         }
         String sortedString = String.join("", collect);
         return sortedString.length() > 5 ? sortedString.substring(0, 5) : sortedString;
