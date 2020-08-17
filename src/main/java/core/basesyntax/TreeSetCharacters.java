@@ -25,13 +25,14 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> setOfChar = new TreeSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             while (reader.ready()) {
-                String line = reader.readLine().toLowerCase().replaceAll("[^a-z]", "");
-                for (char character : line.toCharArray()) {
-                    setOfChar.add(character);
+                int symbol = reader.read();
+                if (Character.isLetter(symbol)) {
+                    setOfChar.add((char) Character.toLowerCase(symbol));
                 }
             }
         } catch (FileNotFoundException e) {
