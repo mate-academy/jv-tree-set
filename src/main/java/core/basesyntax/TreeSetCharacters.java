@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -30,13 +29,14 @@ public class TreeSetCharacters {
     private static final int OUTPUT_LIMIT = 5;
 
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        Set<String> treeSet = new TreeSet<>();
+        Set<Character> treeSet = new TreeSet<>();
         String line = "";
-        try {
-            BufferedReader input = new BufferedReader(new FileReader(fileName));
-            while ((line = input.readLine()) != null) {
-                treeSet.addAll(Arrays.asList(
-                        line.replaceAll("[^a-zA-Z]", "").toLowerCase().split("")));
+        try (BufferedReader input = new BufferedReader(new FileReader(fileName));) {
+            int character;
+            while ((character = input.read()) != -1) {
+                if (Character.isLetter(character)) {
+                    treeSet.add((char) Character.toLowerCase(character));
+                }
             }
         } catch (IOException e) {
             throw new FileNotFoundException("File is not found " + e);
@@ -44,6 +44,7 @@ public class TreeSetCharacters {
         return treeSet.stream()
                 .distinct()
                 .limit(OUTPUT_LIMIT)
+                .map(String::valueOf)
                 .sorted()
                 .collect(Collectors.joining());
     }
