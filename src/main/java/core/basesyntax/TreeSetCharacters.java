@@ -32,9 +32,9 @@ public class TreeSetCharacters {
                 stringBuilder.append(inputLine.toLowerCase().replaceAll("[^a-z]", ""));
             }
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found");
+            System.out.println("File not found");
         } catch (IOException e) {
-            throw new IOException("Can't read from file");
+            System.out.println("Can't read from file");
         }
 
         TreeSet<Character> stringSet = new TreeSet<>();
