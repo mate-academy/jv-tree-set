@@ -26,7 +26,7 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public static final int SYMBOLS_NUMBER = 5;
 
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> set = new TreeSet<>();
         try (FileInputStream fin = new FileInputStream(fileName)) {
             int symbol = 0;
@@ -35,10 +35,6 @@ public class TreeSetCharacters {
                     set.add(Character.toLowerCase((char) symbol));
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File " + fileName + " does not exist");
-        } catch (IOException e) {
-            throw new RuntimeException("File " + fileName + " does not exist");
         }
         StringBuilder stringBuilder = new StringBuilder();
         Iterator iterator = set.iterator();
