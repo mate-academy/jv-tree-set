@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -32,15 +32,13 @@ public class TreeSetCharacters {
             characters = reader.lines()
                     .flatMapToInt(String::chars)
                     .mapToObj(i -> (char) i)
-                    .filter(Character::isAlphabetic)
+                    .filter(Character::isLetter)
                     .map(Character::toLowerCase)
                     .collect(TreeSet::new, TreeSet::add, TreeSet::addAll);
         }
         return characters.stream()
                 .limit(LETTERS_LIMIT)
-                .collect(Collector.of(StringBuilder::new,
-                        StringBuilder::append,
-                        StringBuilder::append,
-                        StringBuilder::toString));
+                .map(String::valueOf)
+                .collect(Collectors.joining());
     }
 }
