@@ -1,10 +1,8 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,26 +23,26 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        StringBuilder data = new StringBuilder();
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(fileName));
-            for (String s : lines) {
-                data.append(s);
-            }
-        } catch (IOException e) {
-            throw new FileNotFoundException();
-        }
-        char[] chars = data.toString().toLowerCase().replaceAll("[^a-z]","").toCharArray();
+    private static final int MAX_SIZE = 5;
+
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> characterSet = new TreeSet<>();
-        for (char ch : chars) {
-            characterSet.add(ch);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int character = reader.read();
+            while (character != -1) {
+                if (Character.isLetter(character)) {
+                    characterSet.add((char)Character.toLowerCase(character));
+                }
+                character = reader.read();
+            }
         }
         StringBuilder builder = new StringBuilder();
         for (char ch : characterSet) {
             builder.append(ch);
         }
 
-        return builder.length() < 5 ? builder.toString() : builder.toString().substring(0, 5);
+        return builder.length() < MAX_SIZE ? builder.toString()
+                : builder.toString().substring(0, MAX_SIZE);
     }
 }
