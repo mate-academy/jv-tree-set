@@ -26,15 +26,16 @@ import java.util.stream.Collectors;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+        Set<String> collect;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            Set<String> collect = bufferedReader.lines()
+            collect = bufferedReader.lines()
                     .flatMap(x -> Arrays.stream(x.toLowerCase()
                             .replaceAll("[\\W\\d]", "")
                             .split(""))).collect(Collectors.toSet());
-            String sortedString = String.join("", collect);
-            return sortedString.length() > 5 ? sortedString.substring(0, 5) : sortedString;
         } catch (IOException e) {
             throw new FileNotFoundException("File not found!!!");
         }
+        String sortedString = String.join("", collect);
+        return sortedString.length() > 5 ? sortedString.substring(0, 5) : sortedString;
     }
 }
