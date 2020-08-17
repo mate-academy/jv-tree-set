@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -25,22 +26,22 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        Set<Character> set = new TreeSet<>();
-        StringBuilder sb = new StringBuilder();
+        Set<Character> resultSet = new TreeSet<>();
+        StringBuilder resultString = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             int letter;
             while ((letter = reader.read()) != -1) {
                 if (Character.isLetter(letter)) {
-                    set.add((char) Character.toLowerCase(letter));
+                    resultSet.add((char) Character.toLowerCase(letter));
                 }
             }
+            Iterator<Character> setIterator = resultSet.iterator();
+            byte count = 0;
+            while (setIterator.hasNext() && count < 5) {
+                resultString.append(setIterator.next());
+                count++;
+            }
+            return resultString.toString();
         }
-        Iterator<Character> setIterator = set.iterator();
-        byte count = 0;
-        while (setIterator.hasNext() && count < 5) {
-            sb.append(setIterator.next());
-            count++;
-        }
-        return sb.toString();
     }
 }
