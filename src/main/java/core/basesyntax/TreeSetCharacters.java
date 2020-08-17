@@ -21,6 +21,8 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int MAX_LENGTH = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         File file = new File(fileName);
         Set<Character> tree = new TreeSet<>();
@@ -36,6 +38,6 @@ public class TreeSetCharacters {
         for (char c : tree) {
             result.append(c);
         }
-        return result.length() < 5 ? result.toString() : result.substring(0, 5);
+        return result.length() < MAX_LENGTH ? result.toString() : result.substring(0, MAX_LENGTH);
     }
 }
