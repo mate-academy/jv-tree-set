@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,24 +24,22 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        File file = new File(fileName);
-        Set<String> fileNameTree = new TreeSet<>();
+        Set<Character> fileTree = new TreeSet<>();
         try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String[] lineArray = sc.nextLine().toLowerCase()
-                        .replaceAll("[^a-zA-Z]", "").split("");
-                for (int i = 0; i < lineArray.length; i++) {
-                    fileNameTree.add(lineArray[i]);
+            FileReader fileReader = new FileReader(fileName);
+            while (fileReader.ready()) {
+                char charFromFile = (char) fileReader.read();
+                if (Character.isAlphabetic(charFromFile)) {
+                    fileTree.add(Character.toLowerCase(charFromFile));
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw e;
+        } catch (IOException e) {
+            throw new FileNotFoundException("File not found " + e);
         }
         StringBuilder finalStr = new StringBuilder();
-        for (String a : fileNameTree) {
+        for (Character a : fileTree) {
             finalStr = finalStr.append(a);
         }
-        return (finalStr.length() <= 5) ? String.valueOf(finalStr) : finalStr.substring(0, 5);
+        return (finalStr.length() < 5) ? String.valueOf(finalStr) : finalStr.substring(0, 5);
     }
 }
