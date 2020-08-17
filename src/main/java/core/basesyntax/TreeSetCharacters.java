@@ -25,6 +25,7 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int NUMBER_OF_LETTERS = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> setOfChar = new TreeSet<>();
@@ -41,7 +42,7 @@ public class TreeSetCharacters {
         StringBuilder result = new StringBuilder();
         int counter = 0;
         Iterator<Character> i = setOfChar.iterator();
-        while (i.hasNext() && counter < 5) {
+        while (i.hasNext() && counter < NUMBER_OF_LETTERS) {
             result.append(i.next());
             counter++;
         }
