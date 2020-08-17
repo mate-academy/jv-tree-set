@@ -26,18 +26,18 @@ public class TreeSetCharacters {
     private static final int MAX_LETTERS = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder resultStr = new StringBuilder();
-        Set<String> latterSet = new TreeSet<>();
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        int charValue;
-        while ((charValue = reader.read()) != -1) {
-            String symbol = String.valueOf((char) charValue).toLowerCase();
-            if (symbol.matches("[a-z]")) {
-                latterSet.add(symbol);
+        Set<Character> letterSet = new TreeSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int charValue;
+            while ((charValue = reader.read()) != -1) {
+                letterSet.add(Character.toLowerCase((char) charValue));
             }
         }
+
+        letterSet.removeIf(symbol -> !Character.isLetter(symbol));
+        StringBuilder resultStr = new StringBuilder();
         int count = 0;
-        for (String s : latterSet) {
+        for (Character s : letterSet) {
             count++;
             resultStr.append(s);
             if (count == MAX_LETTERS) {
