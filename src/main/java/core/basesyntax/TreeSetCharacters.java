@@ -24,6 +24,7 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     private static final int LENGTH = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> letters = new TreeSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -42,6 +43,8 @@ public class TreeSetCharacters {
                 break;
             }
         }
-        return result.length() < LENGTH ? result.toString() : result.toString().substring(0, LENGTH);
+        return result.length() < LENGTH
+                ? result.toString()
+                : result.toString().substring(0, LENGTH);
     }
 }
