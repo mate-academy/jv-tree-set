@@ -24,22 +24,26 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    public static final int SYMBOLS_NUMBER = 5;
+
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         Set<Character> set = new TreeSet<>();
         try (FileInputStream fin = new FileInputStream(fileName)) {
-            int i = 0;
-            while ((i = fin.read()) != -1) {
-                if (Character.isLetter((char) i)) {
-                    set.add(Character.toLowerCase((char) i));
+            int symbol = 0;
+            while ((symbol = fin.read()) != -1) {
+                if (Character.isLetter((char) symbol)) {
+                    set.add(Character.toLowerCase((char) symbol));
                 }
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File " + fileName + " does not exist");
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            throw new RuntimeException("File " + fileName + " does not exist");
         }
         StringBuilder stringBuilder = new StringBuilder();
         Iterator iterator = set.iterator();
         int count = 0;
-        while (iterator.hasNext() && count < 5) {
+        while (iterator.hasNext() && count < SYMBOLS_NUMBER) {
             stringBuilder.append(iterator.next());
             count++;
         }
