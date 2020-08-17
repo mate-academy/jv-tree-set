@@ -35,15 +35,15 @@ public class TreeSetCharacters {
                     resultSet.add((char) Character.toLowerCase(letter));
                 }
             }
-            Iterator<Character> setIterator = resultSet.iterator();
-            byte count = 0;
-            while (setIterator.hasNext() && count < 5) {
-                resultString.append(setIterator.next());
-                count++;
-            }
-            return resultString.toString();
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException(e.getMessage());
         }
+        Iterator<Character> setIterator = resultSet.iterator();
+        byte count = 0;
+        while (setIterator.hasNext() && count < 5) {
+            resultString.append(setIterator.next());
+            count++;
+        }
+        return resultString.toString();
     }
 }
