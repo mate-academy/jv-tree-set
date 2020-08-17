@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
  */
 
 public class TreeSetCharacters {
+    private static final int OUTPUT_LIMIT = 5;
+
     public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         Set<String> treeSet = new TreeSet<>();
         String line = "";
@@ -41,7 +43,7 @@ public class TreeSetCharacters {
         }
         return treeSet.stream()
                 .distinct()
-                .limit(5)
+                .limit(OUTPUT_LIMIT)
                 .sorted()
                 .collect(Collectors.joining());
     }
