@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,6 +24,7 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int RESULT_LENGTH = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<String> treeSet = new TreeSet<>();
@@ -38,11 +38,11 @@ public class TreeSetCharacters {
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException();
         }
-        Iterator<String> itr = treeSet.iterator();
         StringBuilder string = new StringBuilder();
-        while (itr.hasNext() && string.length() < 5) {
-            String value = itr.next();
-            string.append(value);
+        for (String value : treeSet) {
+            if (string.length() < RESULT_LENGTH) {
+                string.append(value);
+            }
         }
         return string.toString();
     }
