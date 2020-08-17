@@ -1,9 +1,10 @@
 package core.basesyntax;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,19 +26,22 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder data = new StringBuilder();
-        try (FileReader fileReader = new FileReader(fileName)) {
-            Scanner scan = new Scanner(fileReader);
-            while (scan.hasNextLine()) {
-                data.append(scan.nextLine());
-            }
-        } catch (FileNotFoundException e) {
+        File file = new File(fileName);
+        if (!file.exists()) {
             throw new FileNotFoundException("File is not found");
         }
-        String stringForTree = data.toString().toLowerCase().replaceAll("[^a-z]", "");
+        StringBuilder data = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                data.append(line);
+            }
+        }
         Set<Character> tree = new TreeSet<>();
-        for (int i = 0; i < stringForTree.length(); i++) {
-            tree.add(stringForTree.charAt(i));
+        for (int i = 0; i < data.length(); i++) {
+            if (Character.isAlphabetic(data.charAt(i))) {
+                tree.add(data.toString().toLowerCase().charAt(i));
+            }
         }
         data.delete(0, data.length());
         for (Character letter : tree) {
