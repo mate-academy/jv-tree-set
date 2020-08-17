@@ -38,10 +38,10 @@ public class TreeSetCharacters {
         } catch (FileNotFoundException e) {
             throw e;
         }
-        String finalStr = "";
+        StringBuilder finalStr = new StringBuilder();
         for (String a : fileNameTree) {
-            finalStr = finalStr + a;
+            finalStr = finalStr.append(a);
         }
-        return (finalStr.length() <= 5) ? finalStr : finalStr.substring(0, 5);
+        return (finalStr.length() <= 5) ? String.valueOf(finalStr) : finalStr.substring(0, 5);
     }
 }
