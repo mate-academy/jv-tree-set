@@ -38,11 +38,10 @@ public class TreeSetCharacters {
             }
         }
         for (Character character : charsFromFile) {
-            if (result.length() < MAX_LENGTH) {
-                result.append(character);
-            } else {
+            if (result.length() == MAX_LENGTH) {
                 break;
             }
+            result.append(character);
         }
         return result.toString();
     }
