@@ -31,15 +31,16 @@ public class TreeSetCharacters {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             int charValue;
             while ((charValue = reader.read()) != -1) {
-                letterSet.add(Character.toLowerCase((char) charValue));
+                if (Character.isLetter(charValue)) {
+                    letterSet.add(Character.toLowerCase((char) charValue));
+                }
             }
         }
 
-        letterSet.removeIf(symbol -> !Character.isLetter(symbol));
         StringBuilder resultStr = new StringBuilder();
         Iterator<Character> iterator = letterSet.iterator();
         int count = 0;
-        while (iterator.hasNext() && count != 5) {
+        while (iterator.hasNext() && count != MAX_LETTERS) {
             count++;
             resultStr.append(iterator.next());
         }
