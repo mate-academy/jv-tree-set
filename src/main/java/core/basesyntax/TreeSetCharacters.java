@@ -19,6 +19,6 @@ public class TreeSetCharacters {
                 }
             }
         }
-        return resultString.toString().toLowerCase();
+        return resultString.toString();
     }
 }
