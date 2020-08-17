@@ -36,8 +36,6 @@ public class TreeSetCharacters {
                 latterSet.add(symbol);
             }
         }
-
-
         int count = 0;
         for (String s : latterSet) {
             count++;
