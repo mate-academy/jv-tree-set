@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>Реалізуйте метод `getUniqueCharacters(String fileName)` який приймає як параметр назву файлу.
@@ -25,21 +25,24 @@ import java.util.stream.Stream;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public static String getUniqueCharacters(String fileName) throws FileNotFoundException {
-        String fileText;
+
+    public static final int RESULT_MAX_LENGTH = 5;
+
+    public static String getUniqueCharacters(String fileName) throws IOException {
+        Set<String> treeSet;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            fileText = bufferedReader.lines()
-                   .map(x -> x.replaceAll("\\W*\\d*", ""))
-                    .collect(Collectors.joining())
-                   .toLowerCase();
+            treeSet = bufferedReader.lines()
+                    .flatMapToInt(s -> s.toLowerCase().chars())
+                    .mapToObj(c -> (char) c)
+                    .filter(Character::isLetter)
+                    .map(String::valueOf)
+                    .sorted()
+                    .collect(Collectors.toCollection(TreeSet::new));
         } catch (IOException e) {
-            throw new FileNotFoundException("This file has not found");
+            throw new FileNotFoundException("File not found");
         }
-        Set<String> treeSet = Stream.of(fileText.split(""))
-                .sorted()
-                .collect(Collectors.toCollection(TreeSet::new));
-        return treeSet.size() >= 5 ? String.join("", treeSet).substring(0, 5)
-                : String.join("", treeSet);
+        return treeSet.stream().limit(RESULT_MAX_LENGTH).collect(Collectors.joining());
     }
 
 }
+
