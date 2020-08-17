@@ -25,14 +25,14 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> letters = new TreeSet<>();
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        while (reader.ready()) {
-            int character = reader.read();
-            if (Character.isLetter(character)) {
-                letters.add((char) Character.toLowerCase(character));
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            while (reader.ready()) {
+                int character = reader.read();
+                if (Character.isLetter(character)) {
+                    letters.add((char) Character.toLowerCase(character));
+                }
             }
         }
-        reader.close();
 
         StringBuilder result = new StringBuilder();
         for (Character c : letters) {
