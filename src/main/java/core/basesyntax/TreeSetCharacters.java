@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,7 +24,7 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         StringBuilder tempString = new StringBuilder();
         Set<String> treeSet = new TreeSet<>();
         String result;
@@ -35,8 +34,6 @@ public class TreeSetCharacters {
                 String[] arrS = line.replaceAll("[^a-zA-Z]", "").toLowerCase().split("");
                 treeSet.addAll(Arrays.asList(arrS));
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException("Where is the file?" + e);
         }
         for (String string : treeSet) {
             tempString.append(string);
