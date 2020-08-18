@@ -43,10 +43,9 @@ public class TreeSetCharacters {
         }
         StringBuilder answer = new StringBuilder();
         for (Character character : charSet) {
-            answer.append(character);
-        }
-        if (answer.length() > 5) {
-            return answer.toString().substring(0, 5);
+            if (answer.length() < 5) {
+                answer.append(character);
+            }
         }
         return answer.toString();
     }
