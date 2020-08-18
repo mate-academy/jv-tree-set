@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -22,10 +23,9 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    private static final int LENGTH_OF_RESULT_STRING = 5;
 
     public String getUniqueCharacters(String fileName) throws IOException {
-        TreeSet<Character> treeSet = new TreeSet<>();
+        Set<Character> treeSet = new TreeSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             int index = reader.read();
             while (index != -1) {
@@ -36,9 +36,11 @@ public class TreeSetCharacters {
             }
         }
         StringBuilder result = new StringBuilder();
-        int sizeOfResult = Math.min(treeSet.size(), LENGTH_OF_RESULT_STRING);
-        for (int i = 0; i < sizeOfResult; i++) {
-            result.append(treeSet.pollFirst());
+        for (Character ch : treeSet) {
+            result.append(ch);
+            if (result.length() == 5) {
+                break;
+            }
         }
         return result.toString();
     }
