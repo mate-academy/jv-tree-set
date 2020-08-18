@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -29,25 +28,21 @@ public class TreeSetCharacters {
 
     public String getUniqueCharacters(String fileName) throws IOException {
 
-        StringBuilder lines = new StringBuilder();
+        Set<Character> chars = new TreeSet<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
-                lines.append(line);
+                for (Character character: line.toLowerCase().toCharArray()) {
+                    if (Character.isLetter(character)) {
+                        chars.add(character);
+                    }
+                }
             }
         }
-        String text = lines.toString().toLowerCase()
-                .replaceAll("(\\d|\\W)", "");
-        Set<Character> chars = new TreeSet<>();
-        for (int i = 0; i < text.length(); i++) {
-            chars.add(text.charAt(i));
-        }
         StringBuilder set = new StringBuilder();
-        int index = 0;
         for (Character character : chars) {
             set.append(character);
-            index++;
-            if (index == SIZE) {
+            if (set.length() == SIZE) {
                 break;
             }
         }
