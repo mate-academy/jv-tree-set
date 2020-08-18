@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,12 +35,16 @@ public class TreeSetCharacters {
                 }
             }
         }
-        for (Character character : treeSet) {
-            stringWithUniqueCharacters.append(character);
+        int size = 0;
+        Iterator<Character> iterator = treeSet.iterator();
+        while (iterator.hasNext() && size < 5) {
+            stringWithUniqueCharacters.append(iterator.next());
+            size++;
         }
-
-        return stringWithUniqueCharacters.length() < 5 ? stringWithUniqueCharacters.toString()
-                : stringWithUniqueCharacters.toString().substring(0, 5);
-
+        return stringWithUniqueCharacters.toString();
     }
 }
+
+
+
+
