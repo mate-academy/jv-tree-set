@@ -23,12 +23,12 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     private static final int MAX_COUNT_CHAR = 5;
-    private int character;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> letters = new TreeSet<>();
         StringBuilder result = new StringBuilder();
         try (FileReader reader = new FileReader(fileName)) {
+            int character;
             while ((character = reader.read()) != -1) {
                 if (Character.isLetter(character)) {
                     letters.add(Character.toLowerCase((char) character));
