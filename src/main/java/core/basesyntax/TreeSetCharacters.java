@@ -39,7 +39,10 @@ public class TreeSetCharacters {
         StringBuilder finalStr = new StringBuilder();
         for (Character a : fileTree) {
             finalStr = finalStr.append(a);
+            if (finalStr.length() == 5) {
+                break;
+            }
         }
-        return (finalStr.length() < 5) ? String.valueOf(finalStr) : finalStr.substring(0, 5);
+        return String.valueOf(finalStr);
     }
 }
