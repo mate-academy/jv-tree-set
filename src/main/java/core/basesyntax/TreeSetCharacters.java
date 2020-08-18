@@ -25,19 +25,19 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         int counter = 0;
-        Set<String> fileNameTree = new TreeSet<>();
+        Set<Character> fileNameTree = new TreeSet<>();
         StringBuilder retval = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String readedLine;
-            while ((readedLine = br.readLine()) != null) {
-                String[] toArr = readedLine.toLowerCase().replaceAll("[^a-z]", "").split("");
-                for (int i = 0; i < toArr.length; i++) {
-                    fileNameTree.add(toArr[i]);
+            while (br.ready()) {
+                int character = br.read();
+                if (Character.isLetter(character)) {
+                    fileNameTree.add((char) Character.toLowerCase(character));
                 }
             }
         }
 
-        for (String s : fileNameTree) {
+        for (Character s : fileNameTree) {
             retval.append(s);
             counter++;
             if (counter == 5) {
