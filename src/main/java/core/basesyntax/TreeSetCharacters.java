@@ -36,13 +36,11 @@ public class TreeSetCharacters {
             }
         }
         for (String string : treeSet) {
-            tempString.append(string);
+            if (tempString.length() < 5) {
+                tempString.append(string);
+            }
         }
-        if (tempString.length() >= 5) {
-            result = tempString.toString().substring(0, 5);
-        } else {
-            result = tempString.toString();
-        }
+        result = tempString.toString();
         return result;
     }
 }
