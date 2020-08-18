@@ -27,11 +27,10 @@ public class TreeSetCharacters {
 
     private static final int MAX_SIZE = 5;
 
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> chars = new TreeSet<>();
 
-        try (FileReader fileReader = new FileReader(fileName);
-                BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             int character = bufferedReader.read();
             while (character != -1) {
                 if (Character.isLetter(character)) {
@@ -39,14 +38,13 @@ public class TreeSetCharacters {
                 }
                 character = bufferedReader.read();
             }
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            throw new FileNotFoundException("File " + fileName + " is not found");
         }
 
         StringBuilder result = new StringBuilder();
+        Object[] charsArray = chars.toArray();
+
         for (int i = 0; i < Math.min(MAX_SIZE, chars.size()); i++) {
-            result.append(chars.toArray()[i]);
+            result.append(charsArray[i]);
         }
 
         return result.toString();
