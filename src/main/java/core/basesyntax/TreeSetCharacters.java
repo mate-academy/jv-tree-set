@@ -36,6 +36,7 @@ public class TreeSetCharacters {
                 .map(String::valueOf)
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
+        bufferedReader.close();
         return treeSet.stream().limit(RESULT_MAX_LENGTH).collect(Collectors.joining());
     }
 }
