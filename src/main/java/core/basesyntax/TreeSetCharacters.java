@@ -29,7 +29,7 @@ public class TreeSetCharacters {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             while (bufferedReader.ready()) {
                 int letter = bufferedReader.read();
-                if (Character.isAlphabetic(letter)) {
+                if (Character.isLetter(letter)) {
                     treeSet.add((char) Character.toLowerCase(letter));
                 }
             }
