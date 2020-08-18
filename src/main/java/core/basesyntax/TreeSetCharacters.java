@@ -1,10 +1,8 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,22 +23,29 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
+        int counter = 0;
         Set<String> fileNameTree = new TreeSet<>();
         StringBuilder retval = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String readedLine;
             while ((readedLine = br.readLine()) != null) {
                 String[] toArr = readedLine.toLowerCase().replaceAll("[^a-z]", "").split("");
-                fileNameTree.addAll(Arrays.asList(toArr));
+                for (int i = 0; i < toArr.length; i++) {
+                    fileNameTree.add(toArr[i]);
+                }
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException("No such file ¯|_(ツ)_|¯");
         }
+
         for (String s : fileNameTree) {
             retval.append(s);
+            counter++;
+            if (counter == 5) {
+                break;
+            }
         }
-        return (retval.length() <= 5) ? retval.toString() : retval.substring(0, 5);
+
+        return retval.toString();
     }
 }
 
