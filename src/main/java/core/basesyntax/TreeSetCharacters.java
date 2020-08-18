@@ -22,13 +22,11 @@ public class TreeSetCharacters {
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found");
         }
-        int temp = 0;
         for (Character element : setOfCharacters) {
-            if (temp == 5) {
+            if (characters.length() == 5) {
                 return characters.toString();
             }
             characters.append(element);
-            temp++;
         }
         return characters.toString();
     }
