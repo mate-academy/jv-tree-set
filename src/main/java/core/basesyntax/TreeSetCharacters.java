@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -24,6 +23,9 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+
+    private static final int THRESHOLD = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> treeSet = new TreeSet<>();
         try (Reader reader = new FileReader(fileName)) {
@@ -34,16 +36,14 @@ public class TreeSetCharacters {
                 }
                 character = reader.read();
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found! " + e);
-        }
-        StringBuilder result = new StringBuilder();
-        for (Character element : treeSet) {
-            result.append(element);
-            if (result.length() == 5) {
-                return result.toString();
+            StringBuilder result = new StringBuilder();
+            for (Character element : treeSet) {
+                result.append(element);
+                if (result.length() == THRESHOLD) {
+                    return result.toString();
+                }
             }
+            return result.toString();
         }
-        return result.toString();
     }
 }
