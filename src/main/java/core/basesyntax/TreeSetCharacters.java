@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
 public class TreeSetCharacters {
     private static final int OUTPUT_LIMIT = 5;
 
-    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
+    public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> treeSet = new TreeSet<>();
         String line = "";
         try (BufferedReader input = new BufferedReader(new FileReader(fileName));) {
@@ -38,10 +37,6 @@ public class TreeSetCharacters {
                     treeSet.add((char) Character.toLowerCase(character));
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File is not found " + e);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return treeSet.stream()
                 .distinct()
