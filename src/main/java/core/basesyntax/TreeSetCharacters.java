@@ -24,7 +24,6 @@ import java.util.TreeSet;
 public class TreeSetCharacters {
     private static final int MAX_COUNT_CHAR = 5;
     private int character;
-    private int currentCharacter = 1;
 
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> letters = new TreeSet<>();
@@ -36,11 +35,10 @@ public class TreeSetCharacters {
                 }
             }
             for (Character value : letters) {
-                if (currentCharacter > MAX_COUNT_CHAR) {
+                result.append(value);
+                if (result.length() == MAX_COUNT_CHAR) {
                     break;
                 }
-                result.append(value);
-                currentCharacter++;
             }
             return result.toString();
         }
