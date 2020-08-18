@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
@@ -23,22 +24,26 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
-    public String getUniqueCharacters(String fileName) throws IOException {
+    public String getUniqueCharacters(String fileName) throws FileNotFoundException {
         Set<Character> uniqueCharsSet = new TreeSet<>();
         StringBuilder result = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        int maxLength = 5;
 
-        int symbol = reader.read();
-        while (symbol > 0) {
-            if (Character.isAlphabetic(symbol)) {
-                uniqueCharsSet.add(Character.toLowerCase((char) symbol));
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int symbol = reader.read();
+            while (symbol != -1) {
+                if (Character.isLetter(symbol)) {
+                    uniqueCharsSet.add(Character.toLowerCase((char) symbol));
+                }
+                symbol = reader.read();
             }
-            symbol = reader.read();
+        } catch (IOException e) {
+            throw new FileNotFoundException();
         }
         for (char c : uniqueCharsSet) {
             result.append(c);
         }
 
-        return result.length() > 5 ? result.substring(0, 5) : result.toString();
+        return result.length() > maxLength ? result.substring(0, maxLength) : result.toString();
     }
 }
