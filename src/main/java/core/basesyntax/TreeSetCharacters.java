@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,22 +24,23 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder tempString = new StringBuilder();
-        Set<String> treeSet = new TreeSet<>();
-        String result;
-        String line;
+        StringBuilder result = new StringBuilder();
+        Set<Character> treeSet = new TreeSet<>();
+        int character;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] arrS = line.replaceAll("[^a-zA-Z]", "").toLowerCase().split("");
-                treeSet.addAll(Arrays.asList(arrS));
+            while ((character = bufferedReader.read()) != -1) {
+                if (Character.isLetter(character)) {
+                    Character.toLowerCase(character);
+                    treeSet.add((char) Character.toLowerCase(character));
+                }
             }
         }
-        for (String string : treeSet) {
-            if (tempString.length() < 5) {
-                tempString.append(string);
+        for (Character characters : treeSet) {
+            result.append(characters);
+            if (result.length() == 5) {
+                return result.toString();
             }
         }
-        result = tempString.toString();
-        return result;
+        return result.toString();
     }
 }
