@@ -38,8 +38,10 @@ public class TreeSetCharacters {
                     treeSet.add((char) Character.toLowerCase(character));
                 }
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File is not found " + e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return treeSet.stream()
                 .distinct()
