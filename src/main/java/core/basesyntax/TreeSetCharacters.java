@@ -33,8 +33,6 @@ public class TreeSetCharacters {
                     text.add(x);
                 }
             }
-        } catch (IOException e) {
-            throw new FileNotFoundException("File not found" + e);
         }
         StringBuilder result = new StringBuilder();
         for (Character x : text) {
