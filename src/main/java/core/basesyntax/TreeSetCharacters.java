@@ -25,17 +25,17 @@ import java.util.stream.Collectors;
  */
 public class TreeSetCharacters {
     public static final int RESULT_MAX_LENGTH = 5;
-
+    
     public static String getUniqueCharacters(String fileName) throws IOException {
         Set<String> treeSet;
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-        treeSet = bufferedReader.lines()
-                .flatMapToInt(s -> s.toLowerCase().chars())
-                .mapToObj(c -> (char) c)
-                .filter(Character::isLetter)
-                .map(String::valueOf)
-                .sorted()
-                .collect(Collectors.toCollection(TreeSet::new));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            treeSet = bufferedReader.lines()
+                    .flatMapToInt(s -> s.toLowerCase().chars())
+                    .mapToObj(c -> (char) c)
+                    .filter(Character::isLetter)
+                    .map(String::valueOf)
+                    .sorted()
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
         return treeSet.stream().limit(RESULT_MAX_LENGTH).collect(Collectors.joining());
     }
