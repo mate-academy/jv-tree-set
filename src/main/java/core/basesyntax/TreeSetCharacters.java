@@ -30,23 +30,24 @@ public class TreeSetCharacters {
         if (!file.exists()) {
             throw new FileNotFoundException("File is not found");
         }
-        StringBuilder data = new StringBuilder();
+        StringBuilder fileData = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                data.append(line);
+                fileData.append(line.toLowerCase());
             }
         }
         Set<Character> tree = new TreeSet<>();
-        for (int i = 0; i < data.length(); i++) {
-            if (Character.isAlphabetic(data.charAt(i))) {
-                tree.add(data.toString().toLowerCase().charAt(i));
+        for (int i = 0; i < fileData.length(); i++) {
+            Character symbol = fileData.charAt(i);
+            if (Character.isAlphabetic(symbol)) {
+                tree.add(symbol);
             }
         }
-        data.delete(0, data.length());
+        StringBuilder result = new StringBuilder();
         for (Character letter : tree) {
-            data.append(letter);
+            result.append(letter);
         }
-        return data.length() < 6 ? data.toString() : data.toString().substring(0, 5);
+        return result.length() < 6 ? result.toString() : result.toString().substring(0, 5);
     }
 }
