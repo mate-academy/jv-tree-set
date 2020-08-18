@@ -24,29 +24,24 @@ import java.util.TreeSet;
  * Результат 2: acf</p>
  */
 public class TreeSetCharacters {
+    private static final int MAX_LENGTH = 5;
+
     public String getUniqueCharacters(String fileName) throws IOException {
-        StringBuilder charsFromFile = new StringBuilder();
+        Set charsFromFile = new TreeSet();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                charsFromFile.append(line);
-                line = bufferedReader.readLine();
+            int charValue;
+            while ((charValue = bufferedReader.read()) != -1) {
+                if (Character.isLetter(charValue)) {
+                    charsFromFile.add(Character.toLowerCase((char) charValue));
+                }
             }
         } catch (FileNotFoundException exception) {
             throw new FileNotFoundException(exception.getMessage());
         }
-        char[] charsArray = new char[charsFromFile.length()];
-        charsFromFile.getChars(0, charsFromFile.length(), charsArray, 0);
-        Set<Character> characters = new TreeSet<>();
-        for (int i = 0; i < charsArray.length; i++) {
-            if (Character.isAlphabetic(charsArray[i])) {
-                characters.add(Character.toLowerCase(charsArray[i]));
-            }
+        StringBuilder result = new StringBuilder();
+        for (Object o : charsFromFile) {
+            result.append(o);
         }
-        String result = "";
-        for (Character character : characters) {
-            result += character;
-        }
-        return result.length() > 5 ? result.substring(0, 5) : result;
+        return result.length() < MAX_LENGTH ? result.toString() : result.substring(0, MAX_LENGTH);
     }
 }
