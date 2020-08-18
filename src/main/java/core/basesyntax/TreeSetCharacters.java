@@ -28,7 +28,7 @@ public class TreeSetCharacters {
 
     public static String getUniqueCharacters(String fileName) throws IOException {
         Set<String> treeSet;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
         treeSet = bufferedReader.lines()
                 .flatMapToInt(s -> s.toLowerCase().chars())
                 .mapToObj(c -> (char) c)
@@ -36,7 +36,7 @@ public class TreeSetCharacters {
                 .map(String::valueOf)
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
-        bufferedReader.close();
+        }
         return treeSet.stream().limit(RESULT_MAX_LENGTH).collect(Collectors.joining());
     }
 }
