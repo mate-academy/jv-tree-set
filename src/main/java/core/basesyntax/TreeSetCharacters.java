@@ -26,11 +26,12 @@ public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
         Set<Character> mySrting = new TreeSet<>();
         int letter;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        while ((letter = bufferedReader.read()) != -1) {
-            if (Character.isLetter((char) letter)) {
-                char charLetter = Character.toLowerCase((char) letter);
-                mySrting.add(charLetter);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            while ((letter = bufferedReader.read()) != -1) {
+                if (Character.isLetter((char) letter)) {
+                    char charLetter = Character.toLowerCase((char) letter);
+                    mySrting.add(charLetter);
+                }
             }
         }
         StringBuilder result = new StringBuilder();
