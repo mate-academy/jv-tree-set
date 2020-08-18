@@ -43,8 +43,6 @@ public class TreeSetCharacters {
                 break;
             }
         }
-        return result.length() < LENGTH
-                ? result.toString()
-                : result.toString().substring(0, LENGTH);
+        return result.toString();
     }
 }
