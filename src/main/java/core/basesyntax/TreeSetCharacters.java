@@ -24,9 +24,16 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        String data = readFile(fileName);
-        data = data.replaceAll("(\\W|\\d)", "").toLowerCase();
-        Set<Character> chars = getCharsFromString(data);
+        Set<Character> chars = new TreeSet<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            int letter = br.read();
+            while (letter != -1) {
+                if (Character.isLetter(letter)) {
+                    chars.add((char) Character.toLowerCase(letter));
+                }
+                letter = br.read();
+            }
+        }
         return setToString(chars);
     }
 
@@ -41,24 +48,5 @@ public class TreeSetCharacters {
             }
         }
         return result.toString();
-    }
-
-    private Set<Character> getCharsFromString(String data) {
-        Set<Character> chars = new TreeSet<>();
-        for (int i = 0; i < data.length(); i++) {
-            chars.add(data.charAt(i));
-        }
-        return chars;
-    }
-
-    private String readFile(String filename) throws IOException {
-        StringBuilder lines = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.append(line);
-            }
-        }
-        return lines.toString();
     }
 }
