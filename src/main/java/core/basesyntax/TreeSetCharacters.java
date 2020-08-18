@@ -38,9 +38,11 @@ public class TreeSetCharacters {
             StringBuilder result = new StringBuilder();
             for (char c : set) {
                 result.append(c);
+                if (result.length() > 4) {
+                    break;
+                }
             }
-            return result.toString().length() > 4
-                    ? result.toString().substring(0, 5) : result.toString();
+            return result.toString();
         }
     }
 }
