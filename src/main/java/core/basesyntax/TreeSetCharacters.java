@@ -34,7 +34,7 @@ public class TreeSetCharacters {
                 }
             }
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("File not found" + e);
         }
         StringBuilder result = new StringBuilder();
         for (Character x : text) {
