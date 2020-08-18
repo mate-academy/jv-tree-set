@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,28 +26,26 @@ import java.util.TreeSet;
  */
 public class TreeSetCharacters {
     public String getUniqueCharacters(String fileName) throws IOException {
-        File file = new File(fileName);
-        if (!file.exists()) {
+        Path path = Paths.get(fileName);
+        if (!Files.exists(path)) {
             throw new FileNotFoundException("File is not found");
         }
-        StringBuilder fileData = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                fileData.append(line.toLowerCase());
-            }
-        }
-        Set<Character> tree = new TreeSet<>();
-        for (int i = 0; i < fileData.length(); i++) {
-            Character symbol = fileData.charAt(i);
+        char[] cleanedFileData = new String(Files.readAllBytes(path)).toLowerCase().toCharArray();
+        Set<Character> sortedUniqueLetters = new TreeSet<>();
+        for (Character symbol : cleanedFileData) {
             if (Character.isAlphabetic(symbol)) {
-                tree.add(symbol);
+                sortedUniqueLetters.add(symbol);
             }
         }
         StringBuilder result = new StringBuilder();
-        for (Character letter : tree) {
+        int counter = 0;
+        for (Character letter : sortedUniqueLetters) {
             result.append(letter);
+            counter++;
+            if (counter == 5) {
+                break;
+            }
         }
-        return result.length() < 6 ? result.toString() : result.toString().substring(0, 5);
+        return result.toString();
     }
 }
