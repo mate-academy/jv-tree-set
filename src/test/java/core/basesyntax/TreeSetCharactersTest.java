@@ -1,10 +1,9 @@
 package core.basesyntax;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TreeSetCharactersTest {
     private static final String FIVE_CHARACTERS = "abdhi";
@@ -43,16 +42,9 @@ public class TreeSetCharactersTest {
                 WITHOUT_CHARACTERS, actualResult);
     }
 
-    @Test
-    public void getExceptionWhenFileNotExist() {
+    @Test (expected = FileNotFoundException.class)
+    public void getExceptionWhenFileNotExist() throws IOException {
         TreeSetCharacters characters = new TreeSetCharacters();
-        try {
-            characters.getUniqueCharacters("file");
-        } catch (FileNotFoundException e) {
-            return;
-        } catch (IOException e) {
-            Assert.fail("FileNotFoundException should be thrown");
-        }
-        Assert.fail("FileNotFoundException should be thrown");
+        characters.getUniqueCharacters("file");
     }
 }
